@@ -6,11 +6,15 @@ import java.util.UUID;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 
 public class Company {
-	
+
 	@PrimaryKey
 	private UUID id;
 
 	private Long userId;
+
+	private Long idContactDetails; // foreign key table tiers
+
+	private Long idLogo;
 
 	private String email;
 
@@ -25,16 +29,37 @@ public class Company {
 	private String phoneNumber;
 
 	private String description;
-	
+
 	private Date creationDate;
-	
+
 	private String industry;
-	
+
 	private String companyCategory;
 	
-	private Long idContactDetails;
+	private Boolean isIdentityValidated;
+	
+	private Boolean isAddressValidated;
 
 	private UserCategory userCategory = UserCategory.COMPANY;
+	
+	private Boolean isPhoneValidated;
+	
+	public Boolean getIsIdentityValidated() {
+		return isIdentityValidated;
+	}
+
+	public void setIsIdentityValidated(Boolean isIdentityValidated) {
+		this.isIdentityValidated = isIdentityValidated;
+	}
+
+	public Boolean getIsAddressValidated() {
+		return isAddressValidated;
+	}
+
+	public void setIsAddressValidated(Boolean isAddressValidated) {
+		this.isAddressValidated = isAddressValidated;
+	}
+
 
 	public UUID getId() {
 		return id;
@@ -147,8 +172,21 @@ public class Company {
 	public void setUserCategory(UserCategory userCategory) {
 		this.userCategory = userCategory;
 	}
-	
-	
 
-	
+	public Long getIdLogo() {
+		return idLogo;
+	}
+
+	public void setIdLogo(Long idLogo) {
+		this.idLogo = idLogo;
+	}
+
+	public Boolean getIsPhoneValidated() {
+		return isPhoneValidated;
+	}
+
+	public void setIsPhoneValidated(Boolean isPhoneValidated) {
+		this.isPhoneValidated = isPhoneValidated;
+	}
+
 }

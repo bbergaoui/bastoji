@@ -13,6 +13,11 @@ public class Individual {
 	
 	private Long idTiers;
 	
+	private Boolean isIdentityValidated;
+	
+	private Boolean isAddressValidated;
+
+	private Boolean isPhoneValidated;
 	
 	private UserCategory userCategory=UserCategory.INDIVIDUAL;
 	
@@ -48,6 +53,30 @@ public class Individual {
 
 	public void setIdTiers(Long idTiers) {
 		this.idTiers = idTiers;
+	}
+
+	public Boolean getIsIdentityValidated() {
+		return isIdentityValidated;
+	}
+
+	public void setIsIdentityValidated(Boolean isIdentityValidated) {
+		this.isIdentityValidated = isIdentityValidated;
+	}
+
+	public Boolean getIsAddressValidated() {
+		return isAddressValidated;
+	}
+
+	public void setIsAddressValidated(Boolean isAddressValidated) {
+		this.isAddressValidated = isAddressValidated;
+	}
+
+	public Boolean getIsPhoneValidated() {
+		return isPhoneValidated;
+	}
+
+	public void setIsPhoneValidated(Boolean isPhoneValidated) {
+		this.isPhoneValidated = isPhoneValidated;
 	}
 
 

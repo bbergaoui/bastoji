@@ -25,11 +25,7 @@ public class tiers {
 
 	private Long idPhoto;
 
-	private Boolean isIdentityValidated;
-
 	private String Address;
-
-	private Boolean isAddressValidated;
 
 	private String email;
 
@@ -42,8 +38,6 @@ public class tiers {
 	private Date subscriptionDate;
 
 	private String phoneNumber;
-
-	private Boolean isPhoneValidated;
 
 	private String idTax;
 	public UUID getId() {
@@ -109,29 +103,13 @@ public class tiers {
 	public void setIdPhoto(Long idPhoto) {
 		this.idPhoto = idPhoto;
 	}
-
-	public Boolean getIsIdentityValidated() {
-		return isIdentityValidated;
-	}
-
-	public void setIsIdentityValidated(Boolean isIdentityValidated) {
-		this.isIdentityValidated = isIdentityValidated;
-	}
-
+	
 	public String getAddress() {
 		return Address;
 	}
 
 	public void setAddress(String address) {
 		Address = address;
-	}
-
-	public Boolean getIsAddressValidated() {
-		return isAddressValidated;
-	}
-
-	public void setIsAddressValidated(Boolean isAddressValidated) {
-		this.isAddressValidated = isAddressValidated;
 	}
 
 	public String getEmail() {
@@ -182,13 +160,6 @@ public class tiers {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Boolean getIsPhoneValidated() {
-		return isPhoneValidated;
-	}
-
-	public void setIsPhoneValidated(Boolean isPhoneValidated) {
-		this.isPhoneValidated = isPhoneValidated;
-	}
 
 	public String getIdTax() {
 		return idTax;
