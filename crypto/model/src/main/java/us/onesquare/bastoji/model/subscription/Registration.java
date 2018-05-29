@@ -39,7 +39,9 @@ public class Registration {
 	@Column
 	private Boolean enabled;
 	
-
+	private String phoneNumber;
+	
+	
 	
 	@Column
 	private String confirmationToken;
@@ -146,6 +148,14 @@ public class Registration {
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 }
