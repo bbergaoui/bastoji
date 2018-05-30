@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import us.onesquare.bastoji.model.User;
+import us.onesquare.bastoji.model.admin.User;
+
+
 
 @Service("userService")
 public class UserService {

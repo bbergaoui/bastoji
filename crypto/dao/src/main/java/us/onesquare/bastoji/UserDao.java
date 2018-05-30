@@ -1,5 +1,6 @@
 package us.onesquare.bastoji;
 
-public class FindByEmail {
+public class UserDao {
+	
 
 }
