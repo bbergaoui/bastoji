@@ -4,8 +4,73 @@ import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-
+import org.springframework.data.cassandra.core.mapping.Table;
+@Table
 public class Company {
+
+	public String getBusinessActivity() {
+		return businessActivity;
+	}
+
+	public void setBusinessActivity(String businessActivity) {
+		this.businessActivity = businessActivity;
+	}
+
+	public String getCompanyType() {
+		return companyType;
+	}
+
+	public void setCompanyType(String companyType) {
+		this.companyType = companyType;
+	}
+
+	public Double getCapital() {
+		return capital;
+	}
+
+	public void setCapital(Double capital) {
+		this.capital = capital;
+	}
+
+	public Integer getEmployeesNumber() {
+		return employeesNumber;
+	}
+
+	public void setEmployeesNumber(Integer employeesNumber) {
+		this.employeesNumber = employeesNumber;
+	}
+
+	public String getLegalStatus() {
+		return legalStatus;
+	}
+
+	public void setLegalStatus(String legalStatus) {
+		this.legalStatus = legalStatus;
+	}
+
+	public String getWebSite() {
+		return webSite;
+	}
+
+	public void setWebSite(String webSite) {
+		this.webSite = webSite;
+	}
+
+	public String getHeadOfficeAddress() {
+		return headOfficeAddress;
+	}
+
+	public void setHeadOfficeAddress(String headOfficeAddress) {
+		this.headOfficeAddress = headOfficeAddress;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
 
 	@PrimaryKey
 	private UUID id;
@@ -32,9 +97,9 @@ public class Company {
 
 	private Date creationDate;
 
-	private String industry;
+	private String businessActivity;
 
-	private String companyCategory;
+	private String companyType;
 	
 	private Boolean isIdentityValidated;
 	
@@ -43,6 +108,20 @@ public class Company {
 	private UserCategory userCategory = UserCategory.COMPANY;
 	
 	private Boolean isPhoneValidated;
+	
+	private Double capital;
+	
+	private Integer employeesNumber;
+	
+	private String legalStatus;
+	
+	private String webSite;
+	
+	private String headOfficeAddress;
+
+	private String director;
+	
+	
 	
 	public Boolean getIsIdentityValidated() {
 		return isIdentityValidated;
@@ -140,23 +219,6 @@ public class Company {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-
-	public String getIndustry() {
-		return industry;
-	}
-
-	public void setIndustry(String industry) {
-		this.industry = industry;
-	}
-
-	public String getCompanyCategory() {
-		return companyCategory;
-	}
-
-	public void setCompanyCategory(String companyCategory) {
-		this.companyCategory = companyCategory;
-	}
-
 	public Long getIdContactDetails() {
 		return idContactDetails;
 	}

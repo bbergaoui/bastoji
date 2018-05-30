@@ -3,7 +3,8 @@ package us.onesquare.bastoji.model.photo;
 import java.util.UUID;
 
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-
+import org.springframework.data.cassandra.core.mapping.Table;
+@Table
 public class Photo {
 	@PrimaryKey
 	private UUID id;
