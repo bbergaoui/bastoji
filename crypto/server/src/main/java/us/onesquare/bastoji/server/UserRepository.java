@@ -11,7 +11,7 @@ import us.onesquare.bastoji.model.admin.User;
 @Repository("userRepository")
 public interface UserRepository extends CassandraRepository<User,UUID> {
     User findByEmail(String email);
-    User findByConfirmationToken(String confirmationToken); 
+//    User findByConfirmationToken(String confirmationToken); 
    // User findByUsername(String username);
 
 
