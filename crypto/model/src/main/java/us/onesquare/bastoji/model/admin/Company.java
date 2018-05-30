@@ -7,7 +7,55 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 @Table
 public class Company {
+	@PrimaryKey
+	private UUID id;
 
+	private Long userId;
+
+	private Long idContactDetails; // foreign key table tiers
+
+	private Long idLogo;
+
+	private String email;
+
+	private String companyId;
+
+	private String address;
+
+	private String idTax;
+
+	private String companyName;
+
+	private String phoneNumber;
+
+	private String description;
+
+	private Date creationDate;
+
+	private String businessActivity;
+
+	private String companyType;
+	
+	private Boolean isIdentityValidated;
+	
+	private Boolean isAddressValidated;
+
+	private UserCategory userCategory = UserCategory.COMPANY;
+	
+	private Boolean isPhoneValidated;
+	
+	private Double capital;
+	
+	private Integer employeesNumber;
+	
+	private String legalStatus;
+	
+	private String webSite;
+	
+	private String headOfficeAddress;
+
+	private String director;
+	
 	public String getBusinessActivity() {
 		return businessActivity;
 	}
@@ -72,54 +120,6 @@ public class Company {
 		this.director = director;
 	}
 
-	@PrimaryKey
-	private UUID id;
-
-	private Long userId;
-
-	private Long idContactDetails; // foreign key table tiers
-
-	private Long idLogo;
-
-	private String email;
-
-	private String companyId;
-
-	private String address;
-
-	private String idTax;
-
-	private String companyName;
-
-	private String phoneNumber;
-
-	private String description;
-
-	private Date creationDate;
-
-	private String businessActivity;
-
-	private String companyType;
-	
-	private Boolean isIdentityValidated;
-	
-	private Boolean isAddressValidated;
-
-	private UserCategory userCategory = UserCategory.COMPANY;
-	
-	private Boolean isPhoneValidated;
-	
-	private Double capital;
-	
-	private Integer employeesNumber;
-	
-	private String legalStatus;
-	
-	private String webSite;
-	
-	private String headOfficeAddress;
-
-	private String director;
 	
 	
 	
