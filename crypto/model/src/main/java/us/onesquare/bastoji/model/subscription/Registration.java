@@ -3,20 +3,19 @@ package us.onesquare.bastoji.model.subscription;
 import java.util.Date;
 import java.util.UUID;
 
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-
+import org.springframework.data.cassandra.core.mapping.Table;
+@Table
 public class Registration {
 	
 	@PrimaryKey
 	private UUID id;
 	
-	@Column
+
 	private String email;
 	
 
-	@Transient
+
 	private String password;
 	
 	
@@ -30,28 +29,37 @@ public class Registration {
 	
 	private String companyId;
 	
-	@Column
+	
 	private String firstName;
 	
-	@Column
+	
 	private String lastName;
 	
-	@Column
+
 	private Boolean enabled;
 	
 	private String phoneNumber;
 	
-	
-	
-	@Column
+
 	private String confirmationToken;
 	
 
+	public String getConfirmationToken() {
+		return confirmationToken;
+	}
+	public void setConfirmationToken(String confirmationToken) {
+		this.confirmationToken = confirmationToken;
+	}
+
 	private Date subscriptionDate;
 	
+	public Registration() {
+	}
 
-
-
+	public Registration(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
 	public UUID getId() {
 		return id;
 	}
@@ -157,5 +165,8 @@ public class Registration {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", email=" + email + ", password=" + password  + "]";
+	}
 }

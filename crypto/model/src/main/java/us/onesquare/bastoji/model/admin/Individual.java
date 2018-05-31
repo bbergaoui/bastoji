@@ -3,7 +3,10 @@ package us.onesquare.bastoji.model.admin;
 import java.util.UUID;
 
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
+import us.onesquare.bastoji.model.utils.UserCategory;
+@Table
 public class Individual {
 	
 	@PrimaryKey

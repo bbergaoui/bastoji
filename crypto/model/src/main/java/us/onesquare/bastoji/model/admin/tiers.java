@@ -4,7 +4,12 @@ import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
+import us.onesquare.bastoji.model.utils.ApplicationAddress;
+import us.onesquare.bastoji.model.utils.Gender;
+import us.onesquare.bastoji.model.utils.TradingExperience;
+@Table
 public class tiers {
 	
 	
@@ -25,7 +30,7 @@ public class tiers {
 
 	private Long idPhoto;
 
-	private String Address;
+	private ApplicationAddress Address;
 
 	private String email;
 
@@ -104,11 +109,11 @@ public class tiers {
 		this.idPhoto = idPhoto;
 	}
 	
-	public String getAddress() {
+	public ApplicationAddress getAddress() {
 		return Address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(ApplicationAddress address) {
 		Address = address;
 	}
 
