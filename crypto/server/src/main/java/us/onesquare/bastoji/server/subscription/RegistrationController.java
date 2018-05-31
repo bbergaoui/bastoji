@@ -1,4 +1,4 @@
-package us.onesquare.bastoji.server;
+package us.onesquare.bastoji.server.subscription;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import us.onesquare.bastoji.model.subscription.Registration;
+import us.onesquare.bastoji.server.EmailService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController

@@ -1,4 +1,4 @@
-package us.onesquare.bastoji.server;
+package us.onesquare.bastoji.server.subscription;
 
 import java.util.UUID;
 

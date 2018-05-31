@@ -1,4 +1,4 @@
-package us.onesquare.bastoji.server;
+package us.onesquare.bastoji.server.admin;
 
 import java.util.ArrayList;
 import java.util.List;

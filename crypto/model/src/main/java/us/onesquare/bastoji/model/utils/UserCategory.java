@@ -1,4 +1,4 @@
-package us.onesquare.bastoji.model.admin;
+package us.onesquare.bastoji.model.utils;
 
 
 public enum UserCategory {

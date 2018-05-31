@@ -1,4 +1,4 @@
-package us.onesquare.bastoji.server;
+package us.onesquare.bastoji.server.admin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +22,6 @@ public class UserService {
     
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email);
-	}
-	
-	public User findByConfirmationToken(String confirmationToken) {
-		return userRepository.findByConfirmationToken(confirmationToken);
 	}
 	
 	public void saveUser(User user) {

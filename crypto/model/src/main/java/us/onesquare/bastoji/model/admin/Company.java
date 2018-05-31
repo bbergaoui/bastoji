@@ -5,6 +5,10 @@ import java.util.UUID;
 
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
+
+import us.onesquare.bastoji.model.utils.ApplicationAddress;
+import us.onesquare.bastoji.model.utils.UserCategory;
+
 @Table
 public class Company {
 	@PrimaryKey
@@ -20,7 +24,7 @@ public class Company {
 
 	private String companyId;
 
-	private String address;
+	private ApplicationAddress address;
 
 	private String idTax;
 
@@ -30,115 +34,35 @@ public class Company {
 
 	private String description;
 
-	private Date creationDate;
+	private Date foundingYear;
 
 	private String businessActivity;
 
 	private String companyType;
-	
+
 	private Boolean isIdentityValidated;
-	
+
 	private Boolean isAddressValidated;
 
 	private UserCategory userCategory = UserCategory.COMPANY;
-	
+
 	private Boolean isPhoneValidated;
-	
+
 	private Double capital;
-	
+
 	private Integer employeesNumber;
-	
+
 	private String legalStatus;
-	
+
 	private String webSite;
-	
-	private String headOfficeAddress;
+
+	private ApplicationAddress headQuarterAddress;
 
 	private String director;
 	
-	public String getBusinessActivity() {
-		return businessActivity;
-	}
+	private String legalImmatriculation;
 
-	public void setBusinessActivity(String businessActivity) {
-		this.businessActivity = businessActivity;
-	}
-
-	public String getCompanyType() {
-		return companyType;
-	}
-
-	public void setCompanyType(String companyType) {
-		this.companyType = companyType;
-	}
-
-	public Double getCapital() {
-		return capital;
-	}
-
-	public void setCapital(Double capital) {
-		this.capital = capital;
-	}
-
-	public Integer getEmployeesNumber() {
-		return employeesNumber;
-	}
-
-	public void setEmployeesNumber(Integer employeesNumber) {
-		this.employeesNumber = employeesNumber;
-	}
-
-	public String getLegalStatus() {
-		return legalStatus;
-	}
-
-	public void setLegalStatus(String legalStatus) {
-		this.legalStatus = legalStatus;
-	}
-
-	public String getWebSite() {
-		return webSite;
-	}
-
-	public void setWebSite(String webSite) {
-		this.webSite = webSite;
-	}
-
-	public String getHeadOfficeAddress() {
-		return headOfficeAddress;
-	}
-
-	public void setHeadOfficeAddress(String headOfficeAddress) {
-		this.headOfficeAddress = headOfficeAddress;
-	}
-
-	public String getDirector() {
-		return director;
-	}
-
-	public void setDirector(String director) {
-		this.director = director;
-	}
-
-	
-	
-	
-	public Boolean getIsIdentityValidated() {
-		return isIdentityValidated;
-	}
-
-	public void setIsIdentityValidated(Boolean isIdentityValidated) {
-		this.isIdentityValidated = isIdentityValidated;
-	}
-
-	public Boolean getIsAddressValidated() {
-		return isAddressValidated;
-	}
-
-	public void setIsAddressValidated(Boolean isAddressValidated) {
-		this.isAddressValidated = isAddressValidated;
-	}
-
+	private Boolean isHeadquarters;
 
 	public UUID getId() {
 		return id;
@@ -154,6 +78,22 @@ public class Company {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public Long getIdContactDetails() {
+		return idContactDetails;
+	}
+
+	public void setIdContactDetails(Long idContactDetails) {
+		this.idContactDetails = idContactDetails;
+	}
+
+	public Long getIdLogo() {
+		return idLogo;
+	}
+
+	public void setIdLogo(Long idLogo) {
+		this.idLogo = idLogo;
 	}
 
 	public String getEmail() {
@@ -172,11 +112,11 @@ public class Company {
 		this.companyId = companyId;
 	}
 
-	public String getAddress() {
+	public ApplicationAddress getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(ApplicationAddress address) {
 		this.address = address;
 	}
 
@@ -212,19 +152,44 @@ public class Company {
 		this.description = description;
 	}
 
-	public Date getCreationDate() {
-		return creationDate;
+	public Date getFoundingYear() {
+		return foundingYear;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-	public Long getIdContactDetails() {
-		return idContactDetails;
+	public void setFoundingYear(Date foundingYear) {
+		this.foundingYear = foundingYear;
 	}
 
-	public void setIdContactDetails(Long idContactDetails) {
-		this.idContactDetails = idContactDetails;
+	public String getBusinessActivity() {
+		return businessActivity;
+	}
+
+	public void setBusinessActivity(String businessActivity) {
+		this.businessActivity = businessActivity;
+	}
+
+	public String getCompanyType() {
+		return companyType;
+	}
+
+	public void setCompanyType(String companyType) {
+		this.companyType = companyType;
+	}
+
+	public Boolean getIsIdentityValidated() {
+		return isIdentityValidated;
+	}
+
+	public void setIsIdentityValidated(Boolean isIdentityValidated) {
+		this.isIdentityValidated = isIdentityValidated;
+	}
+
+	public Boolean getIsAddressValidated() {
+		return isAddressValidated;
+	}
+
+	public void setIsAddressValidated(Boolean isAddressValidated) {
+		this.isAddressValidated = isAddressValidated;
 	}
 
 	public UserCategory getUserCategory() {
@@ -235,14 +200,6 @@ public class Company {
 		this.userCategory = userCategory;
 	}
 
-	public Long getIdLogo() {
-		return idLogo;
-	}
-
-	public void setIdLogo(Long idLogo) {
-		this.idLogo = idLogo;
-	}
-
 	public Boolean getIsPhoneValidated() {
 		return isPhoneValidated;
 	}
@@ -251,4 +208,119 @@ public class Company {
 		this.isPhoneValidated = isPhoneValidated;
 	}
 
+	public Double getCapital() {
+		return capital;
+	}
+
+	public void setCapital(Double capital) {
+		this.capital = capital;
+	}
+
+	public Integer getEmployeesNumber() {
+		return employeesNumber;
+	}
+
+	public void setEmployeesNumber(Integer employeesNumber) {
+		this.employeesNumber = employeesNumber;
+	}
+
+	public String getLegalStatus() {
+		return legalStatus;
+	}
+
+	public void setLegalStatus(String legalStatus) {
+		this.legalStatus = legalStatus;
+	}
+
+	public String getWebSite() {
+		return webSite;
+	}
+
+	public void setWebSite(String webSite) {
+		this.webSite = webSite;
+	}
+
+	public ApplicationAddress getHeadQuarterAddress() {
+		return headQuarterAddress;
+	}
+
+	public void setHeadQuarterAddress(ApplicationAddress headQuarterAddress) {
+		this.headQuarterAddress = headQuarterAddress;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public String getLegalImmatriculation() {
+		return legalImmatriculation;
+	}
+
+	public void setLegalImmatriculation(String legalImmatriculation) {
+		this.legalImmatriculation = legalImmatriculation;
+	}
+
+	public Boolean getIsHeadquarters() {
+		return isHeadquarters;
+	}
+
+	public void setIsHeadquarters(Boolean isHeadquarters) {
+		this.isHeadquarters = isHeadquarters;
+	}
+
+	public String getLegalName() {
+		return legalName;
+	}
+
+	public void setLegalName(String legalName) {
+		this.legalName = legalName;
+	}
+
+	public String getLegalStructure() {
+		return legalStructure;
+	}
+
+	public void setLegalStructure(String legalStructure) {
+		this.legalStructure = legalStructure;
+	}
+
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
+	public String getCategoryLabel() {
+		return categoryLabel;
+	}
+
+	public void setCategoryLabel(String categoryLabel) {
+		this.categoryLabel = categoryLabel;
+	}
+
+	public String getLegalIsNonprofit() {
+		return legalIsNonprofit;
+	}
+
+	public void setLegalIsNonprofit(String legalIsNonprofit) {
+		this.legalIsNonprofit = legalIsNonprofit;
+	}
+
+	private String legalName;
+
+	private String legalStructure;
+	
+	private String categoryCode;
+	
+	private String categoryLabel;
+
+	private String legalIsNonprofit;
+
+	
 }
