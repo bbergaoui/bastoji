@@ -53,6 +53,25 @@
 
 
 
+
+
+<!-- test -->
+ 
+        <!-- Get the dependencies of a web application -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        
+        <!-- Spring Data Cassandra -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-cassandra</artifactId>      
+        </dependency>       
+  
+   
+
+
   </dependencies>
 
   <build>
