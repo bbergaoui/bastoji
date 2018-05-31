@@ -3,21 +3,19 @@ package us.onesquare.bastoji.model.subscription;
 import java.util.Date;
 import java.util.UUID;
 
+import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
-@Table
+@Table("registration")
 public class Registration {
 	
-	@PrimaryKey
+	@PrimaryKey("id")
 	private UUID id;
 	
-
+	@Column("email")
 	private String email;
 	
-
-
 	private String password;
-	
 	
 	private Boolean isCompany;
 	
@@ -29,18 +27,14 @@ public class Registration {
 	
 	private String companyId;
 	
-	
 	private String firstName;
-	
 	
 	private String lastName;
 	
-
 	private Boolean enabled;
 	
 	private String phoneNumber;
 	
-
 	private String confirmationToken;
 	
 
@@ -167,6 +161,6 @@ public class Registration {
 	}
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", email=" + email + ", password=" + password  + "]";
+		return "Registration [id=" + id + ", name="+ firstName+" "+lastName +", email=" + email + ", password=" + password  + "]";
 	}
 }

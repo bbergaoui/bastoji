@@ -1,32 +1,50 @@
 package us.onesquare.bastoji.server.subscription;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import us.onesquare.bastoji.model.subscription.Registration;
+/**
+ * Service interface for Registration to perform CRUD operation.
 
-@Service("regsitrationService")
-public class RegistrationService {
-	private List<Registration> registrations = new ArrayList<Registration>();
-	private RegistrationRepository registrationRepository;
-	
-    @Autowired
-    public RegistrationService(RegistrationRepository registrationRepository) { 
-      this.registrationRepository = registrationRepository;
-    }
-    
-	public Registration findByEmail(String email) {
-		return registrationRepository.findByEmail(email);
-	}
-	
-	public Registration findByConfirmationToken(String confirmationToken) {
-		return registrationRepository.findByConfirmationToken(confirmationToken);
-	}
-	
-	public void saveRegistration(Registration registration) {
-		registrationRepository.save(registration);	}
-	
-	}
+ */
+public interface RegistrationService {
+	Registration findByEmail(String email);
+	Registration findByConfirmationToken(String confirmationToken); 
+  
+	// User findByUsername(String username);
+	 
+	/**
+     * Used to Create the Registration Information
+     * @param registration
+     * @return {@link Registration}
+     */
+	public Registration createRegistration(Registration registration);
+	    
+	    /**
+	     * Getting the Registration Information using Id
+	     * @param id
+	     * @return {@link Registration}
+	     */
+	    public Registration getRegistration(int id);
+	    
+	    /**
+	     * Used to Update the Registration Information
+	     * @param registration
+	     * @return {@link Registration}
+	     */
+	    
+	    public Registration updateRegistration(Registration registration);
+	    
+	    /**
+	     * Deleting the Registration Information using Id
+	     * @param id
+	     */
+	    public void deleteRegistration(int id);
+	    
+	    /**
+	     * Getting the All Registrations information
+	     * @return
+	     */
+	    public List<Registration> getAllRegistrations();
+
+}
