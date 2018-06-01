@@ -37,9 +37,11 @@ public class UserDao  implements IUserDao{
 	@Override
 	public User getUser(UUID id) {
 
+
 		User u =(User) session.execute("select * from user where id=?" , id);
 		return u ;
 	
+
 		
 	}
 
@@ -52,22 +54,30 @@ public class UserDao  implements IUserDao{
 	}
 
 	@Override
-	public void deleteUser(Collection<UUID> Users) {
-		System.out.println("\n*********Delete User Data  *************");
-//		session.execute("delete FROM user where id = 9be87a4a-a3ba-4edd-b90d-116179d4fc1c");
+
+	public void deleteUsers(Collection<UUID> Users) {
 		List<Object[]> list = new ArrayList<Object[]>();
 		for (UUID id : Users) {
 			list.add(new Object[] { id });
 		}
-		
 		session.execute("delete FROM user where id =?"  ,list);
+	}
+		
+
+	public void deleteUser(UUID id) {
+
+		System.out.println("\n*********Delete User Data  *************");
+//		session.execute("delete FROM user where id = 9be87a4a-a3ba-4edd-b90d-116179d4fc1c");
+		
+		
+	
 
 	}
 
 	@Override
-	public ResultSet getAllUsers(final Session inSession) {
+	public ResultSet getAllUsers() {
 		
-		 ResultSet list= inSession.execute("SELECT * FROM user");
+		 ResultSet list= session.execute("SELECT * FROM user");
 		
 		
 		return list;
@@ -75,8 +85,7 @@ public class UserDao  implements IUserDao{
 
 
 	@Override
-	public void deleteUser(UUID id) {
-		// TODO Auto-generated method stub
+	public void deleteAll() {
 		
 	}
 

@@ -1,5 +1,4 @@
-package us.onesquare.bastoji.server.subscription;
-
+package us.onesquare.bastoji.server.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import us.onesquare.bastoji.model.subscription.Registration;
+import us.onesquare.bastoji.server.subscription.RegistrationService;
 
 @RestController
 public class RegistrationController {
