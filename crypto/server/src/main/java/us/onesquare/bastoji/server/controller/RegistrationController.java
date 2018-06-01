@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import us.onesquare.bastoji.model.subscription.Registration;
-import us.onesquare.bastoji.server.subscription.RegistrationService;
+import us.onesquare.bastoji.service.IRegistrationDao;
 
 @RestController
 public class RegistrationController {
 	
 	
 	 @Autowired
-	    private RegistrationService registrationService;
+	    private IRegistrationDao registrationDao;
 	    
 	    public RegistrationController() {
 	        System.out.println("RegistrationController()");
@@ -24,27 +24,27 @@ public class RegistrationController {
 	         
 	    @RequestMapping(value = "/registration", method = RequestMethod.POST)    
 	    Registration create(@RequestBody Registration registration) {        
-	        return registrationService.createRegistration(registration);
+	        return registrationDao.createRegistration(registration);
 	    }
 	 
 	    @RequestMapping(value = "/registration/{id}", method = RequestMethod.DELETE)
 	    void delete(@PathVariable("id") int id) {
-	        registrationService.deleteRegistration(id);
+	        registrationDao.deleteRegistration(id);
 	    }
 	 
 	    @RequestMapping(value="/registration", method = RequestMethod.GET)
 	    List<Registration> findAll() {
-	        return registrationService.getAllRegistrations();
+	        return registrationDao.getAllRegistrations();
 	    }
 	 
 	    @RequestMapping(value = "/registration/{id}", method = RequestMethod.GET)
 	    Registration findById(@PathVariable("id") int id) {        
-	        return registrationService.getRegistration(id);
+	        return registrationDao.getRegistration(id);
 	    }
 	 
 	    @RequestMapping(value = "/registration", method = RequestMethod.PUT)
 	    Registration update(@RequestBody Registration registration) {
-	        return registrationService.updateRegistration(registration);
+	        return registrationDao.updateRegistration(registration);
 	    }
 	
 	

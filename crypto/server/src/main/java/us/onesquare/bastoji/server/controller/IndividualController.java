@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.datastax.driver.core.utils.UUIDs;
 
 import us.onesquare.bastoji.model.admin.Individual;
-import us.onesquare.bastoji.server.admin.IndividualRepository;
+import us.onesquare.bastoji.service.IIndividualDao;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -29,14 +29,14 @@ import us.onesquare.bastoji.server.admin.IndividualRepository;
 public class IndividualController {
 
 	@Autowired
-	IndividualRepository individualRepository;
+	IIndividualDao individualDao;
 
 	@GetMapping("/individuals")
 	public List<Individual> getAllIndividuals() {
 		System.out.println("Get all Individuals...");
 
 		List<Individual> individuals = new ArrayList<>();
-		individualRepository.findAll().forEach(individuals::add);
+		individualDao.getAllIndividuals();
 		return individuals;
 	}
 
@@ -48,7 +48,7 @@ public class IndividualController {
 		individual.setIsAddressValidated(false);
 		individual.setIsIdentityValidated(false);
 		individual.setIsPhoneValidated(false);
-		Individual _individual = individualRepository.save(individual);
+		Individual _individual = individualDao.createIndividual(individual);
 		return new ResponseEntity<>(_individual, HttpStatus.OK);
 	}
 
@@ -56,7 +56,7 @@ public class IndividualController {
 	public ResponseEntity<Individual> updateIndividual(@PathVariable("id") UUID id, @RequestBody Individual individual) {
 		System.out.println("Update Individual with ID = " + id + "...");
 
-		Individual individualData = individualRepository.findById(id).get();
+		Individual individualData = individualDao.getIndividual(id);
 		if (individualData == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -67,7 +67,7 @@ public class IndividualController {
 		individual.setIsAddressValidated(individual.getIsAddressValidated());
 		individual.setIsIdentityValidated(individual.getIsIdentityValidated());
 		individual.setIsPhoneValidated(individual.getIsPhoneValidated());
-		Individual updatedindividual = individualRepository.save(individualData);
+		Individual updatedindividual = individualDao.updateIndividual(individualData);
 		return new ResponseEntity<>(updatedindividual, HttpStatus.OK);
 	}
 
@@ -75,7 +75,7 @@ public class IndividualController {
 	public ResponseEntity<String> deleteIndividual(@PathVariable("id") UUID id) {
 		System.out.println("Delete Individual with ID = " + id + "...");
 
-		individualRepository.delete(individualRepository.findById(id).get());
+		individualDao.deleteIndividual(id);
 
 		return new ResponseEntity<>("Individual has been deleted!", HttpStatus.OK);
 	}
@@ -84,7 +84,7 @@ public class IndividualController {
 	public ResponseEntity<String> deleteAllIndividuals() {
 		System.out.println("Delete All Individuals...");
 
-		individualRepository.deleteAll();
+		individualDao.deleteAll();
 
 		return new ResponseEntity<>("All individuals have been deleted!", HttpStatus.OK);
 	}
