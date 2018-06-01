@@ -1,5 +1,8 @@
 package us.onesquare.bastoji;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import com.datastax.driver.core.BoundStatement;
@@ -26,29 +29,39 @@ public class UserDao  implements IUserDao{
 
 		PreparedStatement prepared = session.prepare("insert into user (id, email, password) values (?, ? ,?)");
 
-		BoundStatement bound = prepared.bind(UUID.randomUUID(), "bitcoin@crypto.tn", "123456");
+		BoundStatement bound = prepared.bind(UUID.randomUUID(), user.getEmail(), user.getPassword());
 		session.execute(bound);
            return user ;
 	}
 
 	@Override
-	public User getUser(int id) {
-		return null;
+	public User getUser(UUID id) {
+
+		User u =(User) session.execute("select * from user where id=?" , id);
+		return u ;
+	
 		
 	}
 
 	@Override
-	public User updateUser(User user) {
+	public void updateUser(User user) {
 		
-		session.execute("update user set password='updated'  where id = 2e962170-63ed-11e8-949c-310409812985");
-		return user ;
+		session.execute("update user set password=? ,email=? " + "  where id = ?" ,user.getPassword(),user.getEmail(),user.getId());
+		
+	
 	}
 
 	@Override
-	public void deleteUser(int id) {
+	public void deleteUser(Collection<UUID> Users) {
 		System.out.println("\n*********Delete User Data  *************");
-		session.execute("delete FROM user where id = 9be87a4a-a3ba-4edd-b90d-116179d4fc1c");
+//		session.execute("delete FROM user where id = 9be87a4a-a3ba-4edd-b90d-116179d4fc1c");
+		List<Object[]> list = new ArrayList<Object[]>();
+		for (UUID id : Users) {
+			list.add(new Object[] { id });
+		}
 		
+		session.execute("delete FROM user where id =?"  ,list);
+
 	}
 
 	@Override
@@ -58,6 +71,13 @@ public class UserDao  implements IUserDao{
 		
 		
 		return list;
+	}
+
+
+	@Override
+	public void deleteUser(UUID id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
