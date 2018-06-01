@@ -21,20 +21,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.datastax.driver.core.utils.UUIDs;
 
 import us.onesquare.bastoji.model.admin.IdentityProof;
-import us.onesquare.bastoji.server.admin.IdentityProofRepository;
+import us.onesquare.bastoji.service.IIdentityProofDao;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class IdentityProofController {
 	@Autowired
-	IdentityProofRepository identityProofRepository;
+	IIdentityProofDao identityProofDao;
 	@GetMapping("/identityProofs")
 	public List<IdentityProof> getAllIdentityProofs() {
 		System.out.println("Get all Identity Proofs...");
 
 		List<IdentityProof> identityProofs = new ArrayList<>();
-		identityProofRepository.findAll().forEach(identityProofs::add);
+		identityProofDao.getAllIdentityProofs();
 		return identityProofs;
 	}
 	@PostMapping("/identityProofs/create")
@@ -42,14 +42,14 @@ public class IdentityProofController {
 		System.out.println("Create Identity Proof: " + identityProof.getId() + "...");
 
 		identityProof.setId(UUIDs.timeBased());
-		IdentityProof _identityProof = identityProofRepository.save(identityProof);
+		IdentityProof _identityProof = identityProofDao.createIdentityProof(identityProof);
 		return new ResponseEntity<>(_identityProof, HttpStatus.OK);
 	}
 	@PutMapping("/identityProofs/{id}")
 	public ResponseEntity<IdentityProof> updateIdentityProof(@PathVariable("id") UUID id, @RequestBody IdentityProof identityProof) {
 		System.out.println("Update Identity Proof with ID = " + id + "...");
 
-		IdentityProof identityProofData = identityProofRepository.findById(id).get();
+		IdentityProof identityProofData = identityProofDao.getIdentityProof(id);
 		if (identityProofData == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -60,14 +60,14 @@ public class IdentityProofController {
 		
 
 		
-		IdentityProof updatedIdentityProof = identityProofRepository.save(identityProofData);
+		IdentityProof updatedIdentityProof = identityProofDao.updateIdentityProof(identityProofData);
 		return new ResponseEntity<>(updatedIdentityProof, HttpStatus.OK);
 	}
 	@DeleteMapping("/identityProofs/{id}")
 	public ResponseEntity<String> deleteIdentityProof(@PathVariable("id") UUID id) {
 		System.out.println("Delete Identity Proof with ID = " + id + "...");
 
-		identityProofRepository.delete(identityProofRepository.findById(id).get());
+		identityProofDao.deleteIdentityProof(id);
 
 		return new ResponseEntity<>("Identity Proof has been deleted!", HttpStatus.OK);
 	}
@@ -76,7 +76,7 @@ public class IdentityProofController {
 	public ResponseEntity<String> deleteAllIdentityProofs() {
 		System.out.println("Delete All identity Proofs...");
 
-		identityProofRepository.deleteAll();
+		identityProofDao.deleteAll();
 
 		return new ResponseEntity<>("All identity Proofs have been deleted!", HttpStatus.OK);
 	}

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.datastax.driver.core.utils.UUIDs;
 
 import us.onesquare.bastoji.model.photo.Photo;
-import us.onesquare.bastoji.server.photo.PhotoRepository;
+import us.onesquare.bastoji.service.IPhotoDao;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -29,14 +29,14 @@ import us.onesquare.bastoji.server.photo.PhotoRepository;
 public class PhotoController {
 
 	@Autowired
-	PhotoRepository photoRepository;
+	IPhotoDao photoDao;
 
 	@GetMapping("/photos")
 	public List<Photo> getAllPhotos() {
 		System.out.println("Get all Photos...");
 
 		List<Photo> photos = new ArrayList<>();
-		photoRepository.findAll().forEach(photos::add);
+		photoDao.getAllPhotos();
 		return photos;
 	}
 
@@ -46,7 +46,7 @@ public class PhotoController {
 
 		photo.setId(UUIDs.timeBased());
 		photo.getThumbnail();
-		Photo _photo = photoRepository.save(photo);
+		Photo _photo = photoDao.createPhoto(photo);
 		return new ResponseEntity<>(_photo, HttpStatus.OK);
 	}
 
@@ -54,14 +54,14 @@ public class PhotoController {
 	public ResponseEntity<Photo> updatePhoto(@PathVariable("id") UUID id, @RequestBody Photo photo) {
 		System.out.println("Update photo with ID = " + id + "...");
 
-		Photo photoData = photoRepository.findById(id).get();
+		Photo photoData = photoDao.getPhoto(id);
 		if (photoData == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		photoData.setPhoto(photo.getPhoto());
 		photoData.setThumbnail(photo.getThumbnail());
 		
-		Photo updatedPhoto = photoRepository.save(photoData);
+		Photo updatedPhoto = photoDao.updatePhoto(photoData);
 		return new ResponseEntity<>(updatedPhoto, HttpStatus.OK);
 	}
 
@@ -69,7 +69,7 @@ public class PhotoController {
 	public ResponseEntity<String> deletePhoto(@PathVariable("id") UUID id) {
 		System.out.println("Delete Photo with ID = " + id + "...");
 
-		photoRepository.delete(photoRepository.findById(id).get());
+		photoDao.deletePhoto(id);
 
 		return new ResponseEntity<>("Photo has been deleted!", HttpStatus.OK);
 	}
@@ -78,7 +78,7 @@ public class PhotoController {
 	public ResponseEntity<String> deleteAllPhotos() {
 		System.out.println("Delete All photos...");
 
-		photoRepository.deleteAll();
+		photoDao.deleteAll();
 
 		return new ResponseEntity<>("All photos have been deleted!", HttpStatus.OK);
 	}

@@ -22,21 +22,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.datastax.driver.core.utils.UUIDs;
 
 import us.onesquare.bastoji.model.admin.Company;
-import us.onesquare.bastoji.server.admin.CompanyRepository;
+import us.onesquare.bastoji.service.ICompanyDao;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class CompanyController {
 	@Autowired
-	CompanyRepository companyRepository;
+	ICompanyDao companyDao;
 
 	@GetMapping("/companies")
 	public List<Company> getAllCompanies() {
 		System.out.println("Get all Companies...");
 
 		List<Company> companies = new ArrayList<>();
-		companyRepository.findAll().forEach(companies::add);
+		
 		return companies;
 	}
 
@@ -45,7 +45,7 @@ public class CompanyController {
 		System.out.println("Create Company: " + company.getLegalName() + "...");
 
 		company.setId(UUIDs.timeBased());
-		Company _company = companyRepository.save(company);
+		Company _company = companyDao.createCompany(company);
 		return new ResponseEntity<>(_company, HttpStatus.OK);
 	}
 
@@ -53,7 +53,7 @@ public class CompanyController {
 	public ResponseEntity<Company> updateCompany(@PathVariable("id") UUID id, @RequestBody Company company) {
 		System.out.println("Update Company with ID = " + id + "...");
 
-		Company companyData = companyRepository.findById(id).get();
+		Company companyData = companyDao.getCompany(id);
 		if (companyData == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -86,7 +86,7 @@ public class CompanyController {
 		companyData.setUserCategory(company.getUserCategory());
 		companyData.setUserId(company.getUserId());	
 		companyData.setWebSite(company.getWebSite());
-		Company updatedCompany = companyRepository.save(companyData);
+		Company updatedCompany = companyDao.updateCompany(companyData);
 		return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
 	}
 
@@ -94,7 +94,7 @@ public class CompanyController {
 	public ResponseEntity<String> deleteCompany(@PathVariable("id") UUID id) {
 		System.out.println("Delete Company with ID = " + id + "...");
 
-		companyRepository.delete(companyRepository.findById(id).get());
+		companyDao.deleteCompany(id);
 
 		return new ResponseEntity<>("Company has been deleted!", HttpStatus.OK);
 	}
@@ -103,7 +103,7 @@ public class CompanyController {
 	public ResponseEntity<String> deleteAllCompanies() {
 		System.out.println("Delete All Companies...");
 
-		companyRepository.deleteAll();
+		companyDao.deleteAll();
 
 		return new ResponseEntity<>("All Companies have been deleted!", HttpStatus.OK);
 	}

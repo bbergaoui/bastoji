@@ -10,7 +10,7 @@ import us.onesquare.bastoji.model.utils.ApplicationAddress;
 import us.onesquare.bastoji.model.utils.Gender;
 import us.onesquare.bastoji.model.utils.TradingExperience;
 @Table
-public class tiers {
+public class Tiers {
 	
 	
 	@PrimaryKey
