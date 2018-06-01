@@ -1,4 +1,4 @@
-package us.onesquare.bastoji.server.admin;
+package us.onesquare.bastoji.server.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.datastax.driver.core.utils.UUIDs;
 
 import us.onesquare.bastoji.model.admin.Company;
+import us.onesquare.bastoji.server.admin.CompanyRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController

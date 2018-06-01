@@ -1,5 +1,4 @@
-package us.onesquare.bastoji.server.photo;
-
+package us.onesquare.bastoji.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.datastax.driver.core.utils.UUIDs;
 
 import us.onesquare.bastoji.model.photo.Photo;
+import us.onesquare.bastoji.server.photo.PhotoRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController

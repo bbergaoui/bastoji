@@ -32,7 +32,7 @@ public class UserDao  implements IUserDao{
 	}
 
 	@Override
-	public User getUser(int id) {
+	public User getUser(UUID id) {
 		return null;
 		
 	}
@@ -45,19 +45,26 @@ public class UserDao  implements IUserDao{
 	}
 
 	@Override
-	public void deleteUser(int id) {
+	public void deleteUser(UUID id) {
 		System.out.println("\n*********Delete User Data  *************");
 		session.execute("delete FROM user where id = 9be87a4a-a3ba-4edd-b90d-116179d4fc1c");
 		
 	}
 
 	@Override
-	public ResultSet getAllUsers(final Session inSession) {
+	public ResultSet getAllUsers() {
 		
-		 ResultSet list= inSession.execute("SELECT * FROM user");
+		 ResultSet list= session.execute("SELECT * FROM user");
 		
 		
 		return list;
+	}
+
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,5 +1,4 @@
-package us.onesquare.bastoji.server.admin;
-
+package us.onesquare.bastoji.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.datastax.driver.core.utils.UUIDs;
 
 import us.onesquare.bastoji.model.admin.IdentityProof;
-import us.onesquare.bastoji.model.admin.User;
+import us.onesquare.bastoji.server.admin.IdentityProofRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
