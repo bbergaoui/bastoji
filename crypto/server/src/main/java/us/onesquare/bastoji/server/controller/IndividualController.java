@@ -67,8 +67,8 @@ public class IndividualController {
 		individual.setIsAddressValidated(individual.getIsAddressValidated());
 		individual.setIsIdentityValidated(individual.getIsIdentityValidated());
 		individual.setIsPhoneValidated(individual.getIsPhoneValidated());
-		Individual updatedindividual = individualDao.updateIndividual(individualData);
-		return new ResponseEntity<>(updatedindividual, HttpStatus.OK);
+		individualDao.updateIndividual(individualData);
+		return new ResponseEntity<>(individualData, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/individuals/{id}")

@@ -11,7 +11,7 @@ public interface IIndividualDao {
 
 	public Individual getIndividual(UUID id);
 
-	public Individual updateIndividual(Individual individual);
+	public void updateIndividual(Individual individual);
 
 	public void deleteIndividual(UUID id);
 	

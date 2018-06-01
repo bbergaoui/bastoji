@@ -10,7 +10,7 @@ public interface IPhotoDao {
 
 	public Photo getPhoto(UUID id);
 
-	public Photo updatePhoto(Photo photo);
+	public void updatePhoto(Photo photo);
 
 	public void deletePhoto(UUID id);
 	

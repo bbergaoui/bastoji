@@ -61,8 +61,8 @@ public class PhotoController {
 		photoData.setPhoto(photo.getPhoto());
 		photoData.setThumbnail(photo.getThumbnail());
 		
-		Photo updatedPhoto = photoDao.updatePhoto(photoData);
-		return new ResponseEntity<>(updatedPhoto, HttpStatus.OK);
+		photoDao.updatePhoto(photoData);
+		return new ResponseEntity<>(photoData, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/photos/{id}")

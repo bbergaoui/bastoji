@@ -86,8 +86,8 @@ public class CompanyController {
 		companyData.setUserCategory(company.getUserCategory());
 		companyData.setUserId(company.getUserId());	
 		companyData.setWebSite(company.getWebSite());
-		Company updatedCompany = companyDao.updateCompany(companyData);
-		return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+		companyDao.updateCompany(companyData);
+		return new ResponseEntity<>(companyData, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/companies/{id}")

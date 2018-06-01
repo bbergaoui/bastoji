@@ -11,7 +11,7 @@ public interface IIdentityProofDao {
 
 	public IdentityProof getIdentityProof(UUID id);
 
-	public IdentityProof updateIdentityProof(IdentityProof identityProof);
+	public void updateIdentityProof(IdentityProof identityProof);
 
 	public void deleteIdentityProof(UUID id);
 

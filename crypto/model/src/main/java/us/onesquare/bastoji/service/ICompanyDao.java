@@ -11,7 +11,7 @@ public interface ICompanyDao {
 
 	public Company getCompany(UUID id);
 
-	public Company updateCompany(Company company);
+	public void updateCompany(Company company);
 
 	public void deleteCompany(UUID id);
 	

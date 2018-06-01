@@ -10,7 +10,7 @@ public interface ITiersDao {
 
 	public Tiers getTiers(UUID id);
 
-	public Tiers updateTiers(Tiers photo);
+	public void updateTiers(Tiers photo);
 
 	public void deleteTiers(UUID id);
 	

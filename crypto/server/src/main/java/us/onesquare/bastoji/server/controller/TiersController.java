@@ -75,8 +75,8 @@ public class TiersController {
 		
 		tiersData.setIdTax(tiers.getIdTax());
 		
-		Tiers updatedTiers = tiersDao.updateTiers(tiersData);
-		return new ResponseEntity<>(updatedTiers, HttpStatus.OK);
+		tiersDao.updateTiers(tiersData);
+		return new ResponseEntity<>(tiersData, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/tiers/{id}")

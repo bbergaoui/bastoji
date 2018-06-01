@@ -1,4 +1,5 @@
 package us.onesquare.bastoji.server.controller;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,39 +14,39 @@ import us.onesquare.bastoji.service.IRegistrationDao;
 
 @RestController
 public class RegistrationController {
-	
-	
-	 @Autowired
-	    private IRegistrationDao registrationDao;
-	    
-	    public RegistrationController() {
-	        System.out.println("RegistrationController()");
-	    }
-	         
-	    @RequestMapping(value = "/registration", method = RequestMethod.POST)    
-	    Registration create(@RequestBody Registration registration) {        
-	        return registrationDao.createRegistration(registration);
-	    }
-	 
-	    @RequestMapping(value = "/registration/{id}", method = RequestMethod.DELETE)
-	    void delete(@PathVariable("id") int id) {
-	        registrationDao.deleteRegistration(id);
-	    }
-	 
-	    @RequestMapping(value="/registration", method = RequestMethod.GET)
-	    List<Registration> findAll() {
-	        return registrationDao.getAllRegistrations();
-	    }
-	 
-	    @RequestMapping(value = "/registration/{id}", method = RequestMethod.GET)
-	    Registration findById(@PathVariable("id") int id) {        
-	        return registrationDao.getRegistration(id);
-	    }
-	 
-	    @RequestMapping(value = "/registration", method = RequestMethod.PUT)
-	    Registration update(@RequestBody Registration registration) {
-	        return registrationDao.updateRegistration(registration);
-	    }
-	
-	
+
+	@Autowired
+	private IRegistrationDao registrationDao;
+
+	public RegistrationController() {
+		System.out.println("RegistrationController()");
+	}
+
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	Registration create(@RequestBody Registration registration) {
+		return registrationDao.createRegistration(registration);
+	}
+
+	@RequestMapping(value = "/registration/{id}", method = RequestMethod.DELETE)
+	void delete(@PathVariable("id") int id) {
+		registrationDao.deleteRegistration(id);
+	}
+
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	List<Registration> findAll() {
+		return registrationDao.getAllRegistrations();
+	}
+
+	@RequestMapping(value = "/registration/{id}", method = RequestMethod.GET)
+	Registration findById(@PathVariable("id") int id) {
+		return registrationDao.getRegistration(id);
+	}
+
+	@RequestMapping(value = "/registration", method = RequestMethod.PUT)
+	Registration update(@RequestBody Registration registration) {
+
+		registrationDao.updateRegistration(registration);
+		return registration;
+	}
+
 }

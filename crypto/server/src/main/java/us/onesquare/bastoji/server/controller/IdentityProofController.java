@@ -60,8 +60,8 @@ public class IdentityProofController {
 		
 
 		
-		IdentityProof updatedIdentityProof = identityProofDao.updateIdentityProof(identityProofData);
-		return new ResponseEntity<>(updatedIdentityProof, HttpStatus.OK);
+		identityProofDao.updateIdentityProof(identityProofData);
+		return new ResponseEntity<>(identityProofData, HttpStatus.OK);
 	}
 	@DeleteMapping("/identityProofs/{id}")
 	public ResponseEntity<String> deleteIdentityProof(@PathVariable("id") UUID id) {
