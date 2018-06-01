@@ -2,9 +2,8 @@
 package us.onesquare.bastoji.service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
-
-import com.datastax.driver.core.ResultSet;
 
 import us.onesquare.bastoji.model.admin.User;
 
@@ -21,7 +20,7 @@ public interface IUserDao {
 	public void deleteAll();
 
 
-	public ResultSet getAllUsers();
+	public List<User> getAllUsers();
 
 	void deleteUsers(Collection<UUID> Users);
 

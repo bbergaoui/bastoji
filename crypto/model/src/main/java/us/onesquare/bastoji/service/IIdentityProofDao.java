@@ -6,6 +6,7 @@ import java.util.UUID;
 import us.onesquare.bastoji.model.admin.IdentityProof;
 
 public interface IIdentityProofDao {
+	
 	public IdentityProof createIdentityProof(IdentityProof identityProof);
 
 	public IdentityProof getIdentityProof(UUID id);

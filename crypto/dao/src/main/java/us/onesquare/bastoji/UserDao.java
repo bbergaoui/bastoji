@@ -10,18 +10,25 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.mapping.Mapper;
+import com.datastax.driver.mapping.MappingManager;
+import com.datastax.driver.mapping.Result;
 
 import us.onesquare.bastoji.model.admin.User;
 import us.onesquare.bastoji.service.IUserDao;
 
-public class UserDao  implements IUserDao{
+public class UserDao implements IUserDao {
 	final Cluster cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
 	final Session session = cluster.connect("javasampleapproach");
+	MappingManager manager = new MappingManager(session); 
+	
 	public static Cluster connect(String node) {
 		return Cluster.builder().addContactPoint(node).build();
-		
-	}
 
+	}
+	 
+
+	Mapper<User> mapper = manager.mapper(User.class);
 
 	@Override
 	public User createUser(User user) {
@@ -31,26 +38,23 @@ public class UserDao  implements IUserDao{
 
 		BoundStatement bound = prepared.bind(UUID.randomUUID(), user.getEmail(), user.getPassword());
 		session.execute(bound);
-           return user ;
+		return user;
 	}
 
 	@Override
 	public User getUser(UUID id) {
 
+		User u = (User) session.execute("select * from user where id=?", id);
+		return u;
 
-		User u =(User) session.execute("select * from user where id=?" , id);
-		return u ;
-	
-
-		
 	}
 
 	@Override
 	public void updateUser(User user) {
-		
-		session.execute("update user set password=? ,email=? " + "  where id = ?" ,user.getPassword(),user.getEmail(),user.getId());
-		
-	
+
+		session.execute("update user set password=? ,email=? " + "  where id = ?", user.getPassword(), user.getEmail(),
+				user.getId());
+
 	}
 
 	@Override
@@ -60,33 +64,31 @@ public class UserDao  implements IUserDao{
 		for (UUID id : Users) {
 			list.add(new Object[] { id });
 		}
-		session.execute("delete FROM user where id =?"  ,list);
+		session.execute("delete FROM user where id =?", list);
 	}
-		
 
 	public void deleteUser(UUID id) {
 
 		System.out.println("\n*********Delete User Data  *************");
-//		session.execute("delete FROM user where id = 9be87a4a-a3ba-4edd-b90d-116179d4fc1c");
-		
-		
-	
+		// session.execute("delete FROM user where id =
+		// 9be87a4a-a3ba-4edd-b90d-116179d4fc1c");
 
 	}
 
 	@Override
-	public ResultSet getAllUsers() {
-		
-		 ResultSet list= session.execute("SELECT * FROM user");
-		
-		
+	public List<User> getAllUsers() {
+		List<User> list=new ArrayList<>();
+		ResultSet results = session.execute("SELECT * FROM user");
+		Result<User> users = mapper.map(results);
+		for (User u : users) {
+		    list.add(u);
+		}
 		return list;
 	}
 
-
 	@Override
 	public void deleteAll() {
-		
+
 	}
 
 }
