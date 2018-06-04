@@ -1,22 +1,31 @@
- CREATE TABLE Company (id uuid primary key,userId bigint,idContactDetails bigint ,idLogo bigint,idTax text,description text,creationDate date,industry,companyCategory text,isIdentityValidated boolean,isAddressValidated boolean,isPhoneValidated boolean,UserCategory text ,email text,password text,login text,companyId text,address text,companyName text,phoneNumber text,contactFirstName text,contactLastName text,contactPhoneNumber text);
+ CREATE TABLE company
+  (id uuid primary key, user_id uuid,id_contact_details uuid ,
+  	id_logo uuid,email varchar, companyId varchar, id_address uuid,
+	id_tax varchar, companyName varchar, phone_number varchar, description varchar,
+	founding_year date , business_activity varchar,company_type varchar,
+ 	is_identity_validated boolean, is_address_validated boolean, user_category int,
+  	is_phone_validated boolean, capital double, employees_number int,legal_status varchar,
+  	web_site varchar,id_headquarter_address uuid, director varchar, legal_immatriculation varchar,
+	is_headquarters boolean);
 
 
 
 
 //user 
 
- CREATE TABLE User (id uuid primary key,email text,password text );
+ CREATE TABLE user (id uuid primary key,email text,password text );
  
  //IdentityProof
- CREATE TABLE User (id uuid primary key,userId bigint,description text ,proof blob,thumbnail blob);
+ CREATE TABLE identity_proof (id uuid primary key,user_id uuid,description text ,proof blob,thumbnail blob);
  
  //tiers
- CREATE TABLE tiers (id uuid primary key,idCard text,passport text ,firstName text,lastName text,birthdate date,gender text ,idPhoto bigint,Address text,email text,function text,facebook text,subscriptionDate date ,phoneNumber text,idTax text ,idTradingExperience text);
+ CREATE TABLE tiers (id uuid primary key,id_card varchar,passport varchar ,first_name varchar,last_name varchar,birthdate date,gender int ,id_photo uuid,id_address uuid,email varchar,function varchar,facebook varchar,subscription_date date ,phone_number varchar,id_tax varchar ,id_trading_experience int);
  
  
  
  // registration
-  CREATE TABLE  registration (id uuid primary key,email text,password text ,isCompany boolean,companyEmail text ,companyAddress text,companyName text,companyId text,firstName text,lastName text,enabled boolean ,phoneNumber text,confirmationToken text );
+CREATE TABLE  registration (id uuid primary key,email varchar,password varchar ,is_company boolean, country varchar,
+street_number varchar, street_name varchar, postal_code varchar,city varchar , company_email varchar ,company_name varchar,company_id varchar,first_name varchar,last_name varchar,enabled boolean ,phone_number text,mail_confirmation_token varchar,phone_confirmation_token varchar );
 
 //ApplicationAddress
 CREATE TABLE  ApplicationAddress (id uuid primary key,country text,streetNumber text ,streetName text,postalCode text ,city text);

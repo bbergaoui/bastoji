@@ -1,5 +1,6 @@
 package us.onesquare.bastoji.dao;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,4 +19,8 @@ public interface IIdentityProofDao {
 	public void deleteAll();
 
 	public List<IdentityProof> getAllIdentityProofs();
+
+	void deleteIdentityProofs(Collection<UUID> IdentityProofs);
+
+	IdentityProof findByUserId(Long userId);
 }

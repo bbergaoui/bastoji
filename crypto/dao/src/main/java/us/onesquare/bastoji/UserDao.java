@@ -73,9 +73,9 @@ public class UserDao implements IUserDao {
 
 	public void deleteUser(UUID id) {
 
-		System.out.println("\n*********Delete User Data  *************");
-		// session.execute("delete FROM user where id =
-		// 9be87a4a-a3ba-4edd-b90d-116179d4fc1c");
+		
+		session.execute("delete FROM user where id =?",id);
+	
 
 	}
 
@@ -87,7 +87,7 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public void deleteAll() {
-
+		session.execute("delete FROM user ");
 	}
 
 

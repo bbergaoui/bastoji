@@ -28,9 +28,9 @@ public class Tiers {
 
 	private Gender gender;
 
-	private Long idPhoto;
+	private UUID idPhoto;
 
-	private ApplicationAddress Address;
+	private UUID idAddress;
 
 	private String email;
 
@@ -38,7 +38,7 @@ public class Tiers {
 
 	private String facebook;
 
-	private TradingExperience idTradingExperience;
+	private Integer idTradingExperience;
 
 	private Date subscriptionDate;
 
@@ -101,20 +101,20 @@ public class Tiers {
 		this.gender = gender;
 	}
 
-	public Long getIdPhoto() {
+	public UUID getIdPhoto() {
 		return idPhoto;
 	}
 
-	public void setIdPhoto(Long idPhoto) {
+	public void setIdPhoto(UUID idPhoto) {
 		this.idPhoto = idPhoto;
 	}
 	
-	public ApplicationAddress getAddress() {
-		return Address;
+	public UUID getAddress() {
+		return idAddress;
 	}
 
-	public void setAddress(ApplicationAddress address) {
-		Address = address;
+	public void setAddress(UUID idaddress) {
+		idAddress = idaddress;
 	}
 
 	public String getEmail() {
@@ -141,11 +141,11 @@ public class Tiers {
 		this.facebook = facebook;
 	}
 
-	public TradingExperience getIdTradingExperience() {
+	public Integer getIdTradingExperience() {
 		return idTradingExperience;
 	}
 
-	public void setIdTradingExperience(TradingExperience idTradingExperience) {
+	public void setIdTradingExperience(Integer idTradingExperience) {
 		this.idTradingExperience = idTradingExperience;
 	}
 

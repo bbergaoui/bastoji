@@ -1,6 +1,8 @@
 package us.onesquare.bastoji.dao;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import us.onesquare.bastoji.model.subscription.Registration;
 
@@ -19,7 +21,7 @@ public interface IRegistrationDao {
      * @param id
      * @return {@link registration}
      */
-    public Registration getRegistration(int id);
+    public Registration getRegistration(UUID id);
     
     /**
      * Used to Update the Registration Information
@@ -27,17 +29,19 @@ public interface IRegistrationDao {
      * @return {@link registration}
      */
     
-    public Registration updateRegistration(Registration registration);
+    public void updateRegistration(Registration registration);
     
     /**
      * Deleting the Registration Information using Id
      * @param id
      */
-    public void deleteRegistration(int id);
+    public void deleteRegistration(UUID id);
     
     /**
      * Getting the All Registration information
      * @return
      */
     public List<Registration> getAllRegistrations();
+
+	void deleteRegistrations(Collection<UUID> registrations);
 }

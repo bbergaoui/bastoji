@@ -1,5 +1,7 @@
 package us.onesquare.bastoji;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,55 +33,52 @@ public class RegistrationImplDao implements IRegistrationDao {
 
 	@Override
 	public Registration createRegistration(Registration registration) {
-		System.out.println("\n*********Insert User Data  *************");
 
 		PreparedStatement prepared = session.prepare(
-				"insert into registration (id, email, password,isCompany,companyEmail,companyAddress,companyName,companyId,firstName,lastName,enabled,phoneNumber,confirmationToken) values (?, ? ,?,?, ? ,?,?, ? ,?,?,?, ? ,?)");
+				"insert into registration (id, email, password,is_company,company_email,company_name,company_id,first_name,last_name,enabled,phone_number,mail_confirmation_token,phone_confirmation_token,city,street_name,street_number,country) values (?, ? ,?,?, ? ,?,?, ? ,?,?,?, ? ,?,?,?,?)");
 
 		BoundStatement bound = prepared.bind(UUID.randomUUID(), registration.getEmail(), registration.getPassword(),
-				registration.getIsCompany(), registration.getCompanyEmail(), registration.getCompanyAddress(),
-				registration.getCompanyName(), registration.getCompanyId(), registration.getFirstName(),
-				registration.getLastName(), registration.getEnabled(), registration.getPhoneNumber(),
-				registration.getConfirmationToken());
+				registration.getIsCompany(), registration.getCompanyEmail(), registration.getCompanyName(),
+				registration.getCompanyId(), registration.getFirstName(), registration.getLastName(),
+				registration.getEnabled(), registration.getPhoneNumber(), registration.getMailConfirmationToken(),
+				registration.getPhoneConfirmationToken(), registration.getCity(), registration.getStreetName(),
+				registration.getStreetNumber(), registration.getCountry());
 		session.execute(bound);
 		return registration;
 	}
 
-	// @Override
-	// public Registration getRegistration(UUID id) {
-	// Registration u = (Registration) session.execute("select * from
-	// registration where id=?", id);
-	// return u;
-	// }
+	@Override
+	public Registration getRegistration(UUID id) {
+		Registration u = (Registration) session.execute("select * from registration where id=?", id);
+		return u;
+	}
 
-	// @Override
-	// public Registration updateRegistration(Registration registration) {
-	// session.execute(
-	// "update registration set password=? ,email=?,isCompany=?,companyEmail=?
-	// ,companyAddress=?,companyName=? ,companyId=?,firstName=? ,lastName=?
-	// ,enabled=? ,phoneNumber=?,confirmationToken=? "
-	// + " where id = ?",
-	// registration.getPassword(), registration.getEmail(),
-	// registration.getIsCompany(),
-	// registration.getCompanyEmail(), registration.getCompanyAddress(),
-	// registration.getCompanyName(),
-	// registration.getCompanyId(), registration.getFirstName(),
-	// registration.getLastName(),
-	// registration.getEnabled(), registration.getPhoneNumber(),
-	// registration.getConfirmationToken(),
-	// registration.getId());
-	//
-	// }
+	@Override
+	public void updateRegistration(Registration registration) {
+		session.execute(
+				"update registration set email=?, password=?,is_company=?,company_email=?,"
+				+ "company_name=?,company_id=?,first_name=?,last_name=?,enabled=?,"
+				+ "phone_number=?,mail_confirmation_token=?,phone_confirmation_token=?,"
+				+ "city=?,street_name=?,street_number=?,country=? " + " where id = ?",
+				registration.getEmail(), registration.getPassword(),
+				registration.getIsCompany(), registration.getCompanyEmail(), registration.getCompanyName(),
+				registration.getCompanyId(), registration.getFirstName(), registration.getLastName(),
+				registration.getEnabled(), registration.getPhoneNumber(), registration.getMailConfirmationToken(),
+				registration.getPhoneConfirmationToken(), registration.getCity(), registration.getStreetName(),
+				registration.getStreetNumber(), registration.getCountry(),
+				registration.getId());
 
-	// @Override
-	// public void deleteRegistration(int id) {
-	//// List<Object[]> list = new ArrayList<Object[]>();
-	//// for (UUID id : Registrations) {
-	//// list.add(new Object[] { id });
-	//// }
-	// session.execute("delete FROM registration where id =?", list);
-	//
-	// }
+	}
+
+	@Override
+	public void deleteRegistrations(Collection<UUID> registrations) {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for (UUID id : registrations) {
+			list.add(new Object[] { id });
+		}
+		session.execute("delete FROM registration where id =?", list);
+
+	}
 
 	@Override
 	public List<Registration> getAllRegistrations() {
@@ -89,21 +88,9 @@ public class RegistrationImplDao implements IRegistrationDao {
 	}
 
 	@Override
-	public Registration getRegistration(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void deleteRegistration(UUID id) {
+		session.execute("delete FROM registration where id =?", id);
 
-	@Override
-	public void deleteRegistration(int id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Registration updateRegistration(Registration registration) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

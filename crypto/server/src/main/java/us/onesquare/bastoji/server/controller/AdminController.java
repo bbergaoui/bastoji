@@ -3,6 +3,7 @@ package us.onesquare.bastoji.server.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import us.onesquare.bastoji.model.subscription.Registration;
 import us.onesquare.bastoji.service.IAdminService;
-
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api")
 @RestController
 public class AdminController {
 
@@ -46,5 +48,6 @@ public class AdminController {
 		adminService.updateRegistration(registration);
 		return registration;
 	}
+	
 
 }

@@ -1,5 +1,6 @@
 package us.onesquare.bastoji.dao;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,5 +18,7 @@ public interface IPhotoDao {
 	public void deleteAll();
 
 	public List<Photo> getAllPhotos();
+
+	void deletePhotos(Collection<UUID> photos);
 
 }

@@ -1,5 +1,6 @@
 package us.onesquare.bastoji.dao;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,4 +18,6 @@ public interface ITiersDao {
 	public void deleteAll();
 
 	public List<Tiers> getAllTierss();
+
+	void deleteTiersList(Collection<UUID> Tierss);
 }

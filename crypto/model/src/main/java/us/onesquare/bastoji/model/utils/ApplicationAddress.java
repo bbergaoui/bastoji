@@ -1,20 +1,16 @@
 package us.onesquare.bastoji.model.utils;
 
+import java.util.UUID;
+
 public class ApplicationAddress {
-	
+	private UUID id;
 	private 	String country;
 	private 	String streetNumber;
 	private     String streetName;
 	private		String postalCode;
 	private 	String city;
 	
-	public  ApplicationAddress (String co,String sNb, String sName,String pCode,String ci){
-		
-		country=co;
-		streetNumber=sNb;
-		streetName=sName;
-		postalCode=pCode;
-		city=ci;
+	public  ApplicationAddress (){
 	}
 
 	public String getCountry() {
@@ -55,6 +51,14 @@ public class ApplicationAddress {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
 	}
 	
 }

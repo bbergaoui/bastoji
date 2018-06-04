@@ -24,7 +24,7 @@ public class Company {
 
 	private String companyId;
 
-	private ApplicationAddress address;
+	private Long  idAddress;
 
 	private String idTax;
 
@@ -44,7 +44,7 @@ public class Company {
 
 	private Boolean isAddressValidated;
 
-	private UserCategory userCategory = UserCategory.COMPANY;
+	private Integer userCategory =2;
 
 	private Boolean isPhoneValidated;
 
@@ -56,7 +56,7 @@ public class Company {
 
 	private String webSite;
 
-	private ApplicationAddress headQuarterAddress;
+	private Long idHeadQuarterAddress;
 
 	private String director;
 	
@@ -112,12 +112,12 @@ public class Company {
 		this.companyId = companyId;
 	}
 
-	public ApplicationAddress getAddress() {
-		return address;
+	public Long getIdAddress() {
+		return idAddress;
 	}
 
-	public void setAddress(ApplicationAddress address) {
-		this.address = address;
+	public void setIdAddress(Long idAddress) {
+		this.idAddress = idAddress;
 	}
 
 	public String getIdTax() {
@@ -192,13 +192,7 @@ public class Company {
 		this.isAddressValidated = isAddressValidated;
 	}
 
-	public UserCategory getUserCategory() {
-		return userCategory;
-	}
 
-	public void setUserCategory(UserCategory userCategory) {
-		this.userCategory = userCategory;
-	}
 
 	public Boolean getIsPhoneValidated() {
 		return isPhoneValidated;
@@ -240,16 +234,26 @@ public class Company {
 		this.webSite = webSite;
 	}
 
-	public ApplicationAddress getHeadQuarterAddress() {
-		return headQuarterAddress;
-	}
-
-	public void setHeadQuarterAddress(ApplicationAddress headQuarterAddress) {
-		this.headQuarterAddress = headQuarterAddress;
-	}
+	
 
 	public String getDirector() {
 		return director;
+	}
+
+	public Integer getUserCategory() {
+		return userCategory;
+	}
+
+	public void setUserCategory(Integer userCategory) {
+		this.userCategory = userCategory;
+	}
+
+	public Long getIdHeadQuarterAddress() {
+		return idHeadQuarterAddress;
+	}
+
+	public void setIdHeadQuarterAddress(Long idHeadQuarterAddress) {
+		this.idHeadQuarterAddress = idHeadQuarterAddress;
 	}
 
 	public void setDirector(String director) {

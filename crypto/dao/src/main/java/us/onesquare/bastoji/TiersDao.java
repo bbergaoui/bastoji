@@ -1,9 +1,12 @@
 package us.onesquare.bastoji;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.stereotype.Component;
 
 import com.datastax.driver.core.BoundStatement;
@@ -15,60 +18,79 @@ import us.onesquare.bastoji.dao.ITiersDao;
 import us.onesquare.bastoji.model.admin.Tiers;
 
 @Component
-public class TiersDao implements ITiersDao{
-	
+public class TiersDao implements ITiersDao {
+
 	@Autowired
 	private Session session;
-	
+
+	@Autowired
+	private CassandraOperations cassandraOperation;
+
+	public static Cluster connect(String node) {
+		return Cluster.builder().addContactPoint(node).build();
+	}
+
 	@Override
-	public Tiers createTiers(Tiers tier) {
-		System.out.println("\n*********Insert User Data Example *************");
+	public Tiers createTiers(Tiers tiers) {
 
-		PreparedStatement prepared = session.prepare("insert into tier (id, idCard, passport,firstName,lastName,birthdate,gender,idPhoto,Address,email,function,facebook,idTradingExperience,subscriptionDate,phoneNumber,idTax) values (?, ? ,?,?, ? ,?,?, ? ,?,?, ? ,?,?, ? ,?,?)");
+		PreparedStatement prepared = session.prepare(
+				"insert into tiers (id, email, address,birthdate,facebook, first_name, function, gender, id_card, id_photo, id_tax, id_trading_experience, last_name,passeport, phone_number, subscription_date) values (?, ? ,?, ?, ? ,?,?, ? ,?,?, ? ,?,?, ? ,?,?)");
 
-		BoundStatement bound = prepared.bind(UUID.randomUUID(), tier.getIdCard(),tier.getPassport(),tier.getFirstName(),tier.getLastName(),tier.getBirthdate(),tier.getGender(),tier.getIdPhoto(),tier.getAddress(),tier.getEmail(),tier.getFunction(),tier.getFacebook(),tier.getIdTradingExperience(),tier.getSubscriptionDate(),tier.getPhoneNumber(),tier.getIdTax());
+		BoundStatement bound = prepared.bind(UUID.randomUUID(), tiers.getEmail(), tiers.getAddress(),
+				tiers.getBirthdate(), tiers.getFacebook(), tiers.getFirstName(), tiers.getFunction(), tiers.getGender(),
+				tiers.getIdCard(), tiers.getIdPhoto(), tiers.getIdTax(), tiers.getIdTradingExperience(),
+				tiers.getLastName(), tiers.getPassport(), tiers.getPhoneNumber(), tiers.getSubscriptionDate());
 		session.execute(bound);
-           return tier ;
+		return tiers;
 	}
 
 	@Override
 	public Tiers getTiers(UUID id) {
-		Tiers t =(Tiers) session.execute("select * from tiers where id=?" , id);
-		return t ;
-	
+
+		Tiers u = (Tiers) session.execute("select * from tiers where id=?", id);
+		return u;
+
 	}
 
 	@Override
-	public void updateTiers(Tiers tier) {
-		session.execute("update tier set idCard=? ,passport=? ,firstName=? ,lastName=? ,birthdate=? ,gender=? ,idPhoto=? , Address=? ,email=? , function=? , facebook=? , idTradingExperience=? , subscriptionDate=? , phoneNumber=? , idTax=?  " + "  where id = ?" ,tier.getIdCard(),tier.getPassport(),tier.getFirstName(),tier.getLastName(),tier.getBirthdate(),tier.getGender(),tier.getAddress(),tier.getEmail(),tier.getFunction(),tier.getFacebook(),tier.getIdTradingExperience(),tier.getSubscriptionDate(),tier.getPhoneNumber(),tier.getIdTax());
+	public void updateTiers(Tiers tiers) {
+
+		session.execute("update tiers set email=?, address=?,birthdate=?,facebook=?,"
+				+ " first_name=?, function=?, gender=?, id_card=?, id_photo=?, id_tax=?, id_trading_experience=?,"
+				+ " last_name,passeport=?, phone_number=?, subscription_date=? " + "  where id = ?", tiers.getEmail(), tiers.getAddress(),
+				tiers.getBirthdate(), tiers.getFacebook(), tiers.getFirstName(), tiers.getFunction(), tiers.getGender(),
+				tiers.getIdCard(), tiers.getIdPhoto(), tiers.getIdTax(), tiers.getIdTradingExperience(),
+				tiers.getLastName(), tiers.getPassport(), tiers.getPhoneNumber(), tiers.getSubscriptionDate(), tiers.getId());
+
 	}
 
 	@Override
+
+	public void deleteTiersList(Collection<UUID> tiers) {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for (UUID id : tiers) {
+			list.add(new Object[] { id });
+		}
+		session.execute("delete FROM tiers where id =?", list);
+	}
+
 	public void deleteTiers(UUID id) {
-		
-		session.execute("delete FROM tiers where id =?"  );
-	}
 
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
+		session.execute("delete FROM tiers where id =?", id);
+
 	}
 
 	@Override
 	public List<Tiers> getAllTierss() {
-		 List list= (List) session.execute("SELECT * FROM tiers");
-			
-			
-			return list;
+		return cassandraOperation.select("SELECT * FROM tiers", Tiers.class);
+
 	}
 
-	
-	
-	
-	
-	
-	
+	@Override
+	public void deleteAll() {
+		session.execute("delete FROM tiers ");
+	}
+
 	
 
 }

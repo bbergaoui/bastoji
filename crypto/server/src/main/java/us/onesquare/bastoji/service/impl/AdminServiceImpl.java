@@ -1,6 +1,7 @@
 package us.onesquare.bastoji.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import us.onesquare.bastoji.dao.IRegistrationDao;
 import us.onesquare.bastoji.dao.IUserDao;
@@ -8,6 +9,7 @@ import us.onesquare.bastoji.model.admin.User;
 import us.onesquare.bastoji.model.subscription.Registration;
 import us.onesquare.bastoji.service.IAdminService;
 
+@Component
 public class AdminServiceImpl implements IAdminService {
 
 	@Autowired

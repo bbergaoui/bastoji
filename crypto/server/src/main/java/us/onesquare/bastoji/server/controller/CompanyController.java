@@ -66,37 +66,9 @@ public class CompanyController {
 		if (companyData == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		companyData.setAddress(company.getAddress());
-		companyData.setBusinessActivity(company.getBusinessActivity());
-		companyData.setCapital(company.getCapital());
-		companyData.setCategoryCode(company.getCategoryCode());
-		companyData.setCategoryLabel(company.getCategoryLabel());
-		companyData.setCompanyName(company.getCompanyName());
-		companyData.setCompanyType(company.getCompanyType());
-		companyData.setDescription(company.getDescription());
-		companyData.setDirector(company.getDirector());
-		companyData.setEmail(company.getEmail());
-		companyData.setEmployeesNumber(company.getEmployeesNumber());
-		companyData.setFoundingYear(company.getFoundingYear());
-		companyData.setHeadQuarterAddress(company.getHeadQuarterAddress());
-		companyData.setIdContactDetails(company.getIdContactDetails());
-		companyData.setIdLogo(company.getIdLogo());
-		companyData.setIdTax(company.getIdTax());
-		companyData.setIsAddressValidated(company.getIsAddressValidated());
-		companyData.setIsHeadquarters(company.getIsHeadquarters());
-		companyData.setIsIdentityValidated(company.getIsIdentityValidated());
-		companyData.setIsPhoneValidated(company.getIsPhoneValidated());
-		companyData.setLegalImmatriculation(company.getLegalImmatriculation());
-		companyData.setLegalIsNonprofit(company.getLegalIsNonprofit());
-		companyData.setLegalName(company.getLegalName());
-		companyData.setLegalStatus(company.getLegalStatus());
-		companyData.setLegalStructure(company.getLegalStructure());
-		companyData.setPhoneNumber(company.getPhoneNumber());
-		companyData.setUserCategory(company.getUserCategory());
-		companyData.setUserId(company.getUserId());	
-		companyData.setWebSite(company.getWebSite());
-		companyDao.updateCompany(companyData);
-		return new ResponseEntity<>(companyData, HttpStatus.OK);
+	
+		companyDao.updateCompany(company);
+		return new ResponseEntity<>(company, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/companies/{id}")
