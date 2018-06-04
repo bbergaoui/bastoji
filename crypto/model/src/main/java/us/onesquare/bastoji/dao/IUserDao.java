@@ -1,5 +1,5 @@
 
-package us.onesquare.bastoji.service;
+package us.onesquare.bastoji.dao;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,5 +23,7 @@ public interface IUserDao {
 	public List<User> getAllUsers();
 
 	void deleteUsers(Collection<UUID> Users);
+
+	public User findByUserNameAndPassword(String login, String password);
 
 }

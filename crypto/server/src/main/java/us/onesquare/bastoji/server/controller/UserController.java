@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.datastax.driver.core.utils.UUIDs;
 
+import us.onesquare.bastoji.dao.IUserDao;
 import us.onesquare.bastoji.model.admin.User;
-import us.onesquare.bastoji.service.IUserDao;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")

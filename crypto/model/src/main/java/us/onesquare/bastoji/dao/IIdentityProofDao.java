@@ -1,4 +1,4 @@
-package us.onesquare.bastoji.service;
+package us.onesquare.bastoji.dao;
 
 import java.util.List;
 import java.util.UUID;

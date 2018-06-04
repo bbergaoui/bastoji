@@ -3,10 +3,11 @@ package us.onesquare.bastoji;
 
 import java.sql.Date;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+
+import org.springframework.stereotype.Component;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
@@ -17,10 +18,12 @@ import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.TypeCodec;
 
-public class CompanyDao {
-	public static Cluster connect(String node) {
-		return Cluster.builder().addContactPoint(node).build();
-	}
+import us.onesquare.bastoji.dao.ICompanyDao;
+import us.onesquare.bastoji.model.admin.Company;
+
+@Component
+public class CompanyDao implements ICompanyDao{
+	
 
 	public static void main(String[] args) throws Exception {
 		// Connect to the cluster and keyspace "devjavasource"
@@ -68,6 +71,42 @@ public class CompanyDao {
 		for (Row row : results) {
 			System.out.format("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n", row.getUUID("id"),row.getLong("userId"),row.getLong("idContactDetails"),row.getLong("idLogo"),row.getString("email"),row.getString("companyId"),row.getString("address"),row.getString("idTax"),row.getString("companyName"),row.getString("phoneNumber"),row.getString("description"),row.getDate("creationDate"),row.getString("industry"),row.getString("companyCategory"),row.getBool("isIdentityValidated"),row.getBool("isAddressValidated"),row.getString("userCategory"),row.getBool("isPhoneValidated"));
 		}
+	}
+
+	@Override
+	public Company createCompany(Company company) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Company getCompany(UUID id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateCompany(Company company) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteCompany(UUID id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Company> getAllCompanies() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

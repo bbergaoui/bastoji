@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.datastax.driver.core.utils.UUIDs;
 
+import us.onesquare.bastoji.dao.ITiersDao;
 import us.onesquare.bastoji.model.admin.Tiers;
-import us.onesquare.bastoji.service.ITiersDao;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController

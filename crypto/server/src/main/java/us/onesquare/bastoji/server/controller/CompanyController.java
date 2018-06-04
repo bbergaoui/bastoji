@@ -21,15 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.datastax.driver.core.utils.UUIDs;
 
+import us.onesquare.bastoji.CompanyDao;
+import us.onesquare.bastoji.dao.ICompanyDao;
 import us.onesquare.bastoji.model.admin.Company;
-import us.onesquare.bastoji.service.ICompanyDao;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class CompanyController {
 	@Autowired
-	ICompanyDao companyDao;
+	private ICompanyDao companyDao;
+
+	public ICompanyDao getCompanyDao() {
+		return companyDao;
+	}
+
+	public void setCompanyDao(ICompanyDao companyDao) {
+		this.companyDao = companyDao;
+	}
 
 	@GetMapping("/companies")
 	public List<Company> getAllCompanies() {

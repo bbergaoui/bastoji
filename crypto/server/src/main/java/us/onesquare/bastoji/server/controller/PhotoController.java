@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.datastax.driver.core.utils.UUIDs;
 
+import us.onesquare.bastoji.dao.IPhotoDao;
 import us.onesquare.bastoji.model.photo.Photo;
-import us.onesquare.bastoji.service.IPhotoDao;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController

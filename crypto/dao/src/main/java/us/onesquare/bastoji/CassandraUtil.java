@@ -15,6 +15,10 @@ import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.data.cassandra.core.CassandraTemplate;
 //import org.springframework.data.cassandra.mapping.BasicCassandraMappingContext;
 //import org.springframework.data.cassandra.mapping.CassandraMappingContext;
+import org.springframework.data.cassandra.core.convert.CassandraConverter;
+import org.springframework.data.cassandra.core.convert.MappingCassandraConverter;
+import org.springframework.data.cassandra.core.mapping.BasicCassandraMappingContext;
+import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
 
 /**
  * Utility class for getting the CassandraOperations object.
@@ -38,6 +42,8 @@ public class CassandraUtil {
      * Constant String for Port 
      */
     private static final String PORT = "cassandra.port";
+	private static final String USERNAME = "cassandra.username";
+	private static final String PASSWORD = "cassandra.password";
     
     @Autowired
     private Environment environment;
@@ -65,25 +71,35 @@ public class CassandraUtil {
         CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
         cluster.setContactPoints(getContactPoints());
         cluster.setPort(getPortNumber());
+        cluster.setUsername(getUsername());
+        cluster.setPassword(getPassword());
         return cluster;
     }
 
-//    @Bean
-//    public CassandraMappingContext mappingContext() {
-//        return new BasicCassandraMappingContext();
-//    }
+    private String getPassword() {
+		return environment.getProperty(USERNAME);
+	}
+
+	private String getUsername() {
+		return environment.getProperty(PASSWORD);
+	}
+
+	@Bean
+    public CassandraMappingContext mappingContext() {
+        return new CassandraMappingContext();
+    }
 //
-//    @Bean
-//    public CassandraConverter converter() {
-//        return new MappingCassandraConverter(mappingContext());
-//    }
+    @Bean
+    public CassandraConverter converter() {
+        return new MappingCassandraConverter(mappingContext());
+    }
 
     @Bean
     public CassandraSessionFactoryBean session() throws Exception {
         CassandraSessionFactoryBean cassandraSessionFactoryBean = new CassandraSessionFactoryBean();
         cassandraSessionFactoryBean.setCluster(cluster().getObject());
         cassandraSessionFactoryBean.setKeyspaceName(getKeyspaceName());
-//        cassandraSessionFactoryBean.setConverter(converter());
+        cassandraSessionFactoryBean.setConverter(converter());
         cassandraSessionFactoryBean.setSchemaAction(SchemaAction.NONE);
         return cassandraSessionFactoryBean;
     }

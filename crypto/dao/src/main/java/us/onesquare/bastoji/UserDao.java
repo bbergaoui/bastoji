@@ -5,34 +5,38 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.cassandra.core.CassandraOperations;
+import org.springframework.stereotype.Component;
+
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
-import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.mapping.Mapper;
-import com.datastax.driver.mapping.MappingManager;
-import com.datastax.driver.mapping.Result;
 
+import us.onesquare.bastoji.dao.IUserDao;
 import us.onesquare.bastoji.model.admin.User;
-import us.onesquare.bastoji.service.IUserDao;
 
+@Component
 public class UserDao implements IUserDao {
-	final Cluster cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
-	final Session session = cluster.connect("javasampleapproach");
-	MappingManager manager = new MappingManager(session); 
 	
+	
+	@Autowired
+	private Session session;
+	
+	
+	
+	@Autowired
+	private CassandraOperations cassandraOperation;
+
 	public static Cluster connect(String node) {
 		return Cluster.builder().addContactPoint(node).build();
-
 	}
 	 
 
-	Mapper<User> mapper = manager.mapper(User.class);
 
 	@Override
 	public User createUser(User user) {
-		System.out.println("\n*********Insert User Data Example *************");
 
 		PreparedStatement prepared = session.prepare("insert into user (id, email, password) values (?, ? ,?)");
 
@@ -77,18 +81,23 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public List<User> getAllUsers() {
-		List<User> list=new ArrayList<>();
-		ResultSet results = session.execute("SELECT * FROM user");
-		Result<User> users = mapper.map(results);
-		for (User u : users) {
-		    list.add(u);
-		}
-		return list;
+		return cassandraOperation.select("SELECT * FROM user" , User.class);
+		
 	}
 
 	@Override
 	public void deleteAll() {
 
+	}
+
+
+
+	@Override
+	public User findByUserNameAndPassword(String login, String password) {
+		PreparedStatement prepared = session.prepare("insert into user (id, email, password) values (?, ? ,?)");
+		BoundStatement bound = prepared.bind( login, password);
+		return cassandraOperation.selectOne(bound, User.class);
+		
 	}
 
 }

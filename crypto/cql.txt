@@ -1,0 +1,42 @@
+ CREATE TABLE Company (id uuid primary key,userId bigint,idContactDetails bigint ,idLogo bigint,idTax text,description text,creationDate date,industry,companyCategory text,isIdentityValidated boolean,isAddressValidated boolean,isPhoneValidated boolean,UserCategory text ,email text,password text,login text,companyId text,address text,companyName text,phoneNumber text,contactFirstName text,contactLastName text,contactPhoneNumber text);
+
+
+
+
+//user 
+
+ CREATE TABLE User (id uuid primary key,email text,password text );
+ 
+ //IdentityProof
+ CREATE TABLE User (id uuid primary key,userId bigint,description text ,proof blob,thumbnail blob);
+ 
+ //tiers
+ CREATE TABLE tiers (id uuid primary key,idCard text,passport text ,firstName text,lastName text,birthdate date,gender text ,idPhoto bigint,Address text,email text,function text,facebook text,subscriptionDate date ,phoneNumber text,idTax text ,idTradingExperience text);
+ 
+ 
+ 
+ // registration
+  CREATE TABLE  registration (id uuid primary key,email text,password text ,isCompany boolean,companyEmail text ,companyAddress text,companyName text,companyId text,firstName text,lastName text,enabled boolean ,phoneNumber text,confirmationToken text );
+
+//ApplicationAddress
+CREATE TABLE  ApplicationAddress (id uuid primary key,country text,streetNumber text ,streetName text,postalCode text ,city text);
+//photo
+CREATE TABLE  photo (id uuid primary key,photo blob,thumbnail blob);
+
+
+
+
+
+		
+		
+
+
+
+
+
+
+
+
+
+
+
