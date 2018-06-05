@@ -32,24 +32,7 @@ public class CompanyDao implements ICompanyDao {
 
 	@Override
 	public Company createCompany(Company company) {
-		PreparedStatement prepared = session
-				.prepare("insert into company (id, email, business_activity,capital,category_code,"
-						+ "category_label,company_id,company_name,company_type, description,director,employees_number,founding_year,id_address,"
-						+ "id_contact_details,id_headquarter_address,id_tax, is_address_validated,is_headquarter,"
-						+ "is_identity_validated, is_phone_validated, legal_immatriculation,id_logo,legal_name,"
-						+ "legal_status, legal_structure,phone_number,user_id,web_site) values (?, ? ,?)");
-
-		BoundStatement bound = prepared.bind(UUID.randomUUID(), company.getEmail(), company.getBusinessActivity(),
-				company.getCapital(), company.getCategoryCode(), company.getCategoryLabel(), company.getCompanyId(),
-				company.getCompanyName(), company.getCompanyType(), company.getDescription(), company.getDirector(),
-				company.getEmployeesNumber(), company.getFoundingYear(), company.getIdAddress(),
-				company.getIdContactDetails(), company.getIdHeadQuarterAddress(), company.getIdTax(),
-				company.getIsAddressValidated(), company.getIsHeadquarters(), company.getIsIdentityValidated(),
-				company.getIsPhoneValidated(), company.getLegalImmatriculation(), company.getIdLogo(),
-				company.getLegalName(), company.getLegalStatus(), company.getLegalStructure(), company.getPhoneNumber(),
-				
-				 company.getUserId(), company.getWebSite());
-		session.execute(bound);
+		cassandraOperation.insert(company);
 		return company;
 	}
 

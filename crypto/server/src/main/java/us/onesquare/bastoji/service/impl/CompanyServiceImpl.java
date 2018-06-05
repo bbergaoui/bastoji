@@ -1,5 +1,6 @@
 package us.onesquare.bastoji.service.impl;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,8 @@ public class CompanyServiceImpl implements ICompanyService{
 		
 	}
 
+	@Override
+	public List<Company> getAllCompanies(Long first, Long limit) {
+		return companyDao.getAllCompanies();
+	}
 }

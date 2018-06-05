@@ -33,9 +33,9 @@ public class CompanyController {
 	
 	@GetMapping("/companies")
 	public List<Company> getAllCompanies() {
-		List<Company> companies = new ArrayList<>();
+
 		
-		return companies;
+		return companyService.getAllCompanies(0l,10l);
 	}
 
 	@PostMapping("/companies/create")
