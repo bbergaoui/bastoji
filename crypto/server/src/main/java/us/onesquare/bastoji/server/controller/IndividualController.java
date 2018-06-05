@@ -31,13 +31,7 @@ public class IndividualController {
 	@Autowired
 	IIndividualService individualService;
 
-	@GetMapping("/individuals")
-	public List<Individual> getAllIndividuals() {
-
-		List<Individual> individuals = new ArrayList<>();
-		individualService.getAllIndividuals();
-		return individuals;
-	}
+	
 
 	@PostMapping("/individuals/create")
 	public ResponseEntity<Individual> createIndividual(@Valid @RequestBody Individual individual) {

@@ -20,7 +20,8 @@ public class User {
 
 	@Transient
 	private String password;
-	private UserCategory userCategory;
+	private Integer userCategory;
+	
 	
 	public User() {
 	}
@@ -54,11 +55,11 @@ public class User {
 		this.email = email;
 	}
 
-	public UserCategory getUserCategory() {
+	public Integer getUserCategory() {
 		return userCategory;
 	}
 
-	public void setUserCategory(UserCategory userCategory) {
+	public void setUserCategory(Integer userCategory) {
 		this.userCategory = userCategory;
 	}
 

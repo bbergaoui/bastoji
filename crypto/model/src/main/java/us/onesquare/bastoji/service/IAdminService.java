@@ -12,4 +12,6 @@ public interface IAdminService {
 	User login(String login , String password);
 
 	void updateRegistration(Registration registration);
+
+	void getUserProfile(User user);
 }
