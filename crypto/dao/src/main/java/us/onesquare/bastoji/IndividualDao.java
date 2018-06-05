@@ -34,11 +34,11 @@ public class IndividualDao implements IIndividualDao {
 	public Individual createIndividual(Individual individual) {
 
 		PreparedStatement prepared = session.prepare(
-				"insert into individual (id, id_tiers,id_user,is_identity_validated,is_address_validated,is_phone_validated, user_category) values (?, ? ,?, ?, ?, ?)");
+				"insert into individual (id, id_tiers,id_user,is_identity_validated,is_address_validated,is_phone_validated) values (?, ? ,?, ?, ?)");
 
 		BoundStatement bound = prepared.bind(UUID.randomUUID(), individual.getIdTiers(), individual.getIdUser(),
 				individual.getIsIdentityValidated(), individual.getIsAddressValidated(),
-				individual.getIsPhoneValidated(), individual.getUserCategory());
+				individual.getIsPhoneValidated());
 		session.execute(bound);
 		return individual;
 	}
@@ -55,10 +55,10 @@ public class IndividualDao implements IIndividualDao {
 	public void updateIndividual(Individual individual) {
 
 		session.execute(
-				"update individual set id_tiers=?,id_user=?,is_identity_validated=?,is_address_validated=?,is_phone_validated=?, user_category=? "
+				"update individual set id_tiers=?,id_user=?,is_identity_validated=?,is_address_validated=?,is_phone_validated=? "
 						+ "  where id = ?",
 				individual.getIdTiers(), individual.getIdUser(), individual.getIsIdentityValidated(),
-				individual.getIsAddressValidated(), individual.getIsPhoneValidated(), individual.getUserCategory(),
+				individual.getIsAddressValidated(), individual.getIsPhoneValidated(), 
 				individual.getId());
 
 	}

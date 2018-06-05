@@ -1,113 +1,116 @@
 package us.onesquare.bastoji;
 
-
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.stereotype.Component;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.CodecRegistry;
 import com.datastax.driver.core.PreparedStatement;
-import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.TypeCodec;
 
 import us.onesquare.bastoji.dao.ICompanyDao;
 import us.onesquare.bastoji.model.admin.Company;
 
 @Component
-public class CompanyDao implements ICompanyDao{
-	
+public class CompanyDao implements ICompanyDao {
 
-	public static void main(String[] args) throws Exception {
-		// Connect to the cluster and keyspace "devjavasource"
-		final Cluster cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
-		final Session session = cluster.connect("javasampleapproach");
+	@Autowired
+	private Session session;
 
-		// Retrieve all User details from Users table
-		System.out.println("\n*********Retrive Company Data *************");
-		//getUsersAllDetails(session);
+	@Autowired
+	private CassandraOperations cassandraOperation;
 
-		// Insert new User into users table
-		System.out.println("\n*********Insert Company Data  *************");
-
-		PreparedStatement prepared = session.prepare("insert into company (id, userId, idContactDetails ,idLogo,email,companyId,address,idTax,companyName,phoneNumber,description,creationDate,industry,companyCategory,isIdentityValidated,isAddressValidated,userCategory,isPhoneValidated) values (?, ? ,?,?, ? ,?,?, ? ,?,?, ? ,?,?, ? ,?,?, ? ,?)");
-		String target = "2011-02-03";
-		DateFormat df = new SimpleDateFormat("yyyyy-mm-dd");
-		java.util.Date result =  df.parse(target); 
-		System.out.println("dateeeeeeeeeeeeeeeeeeeeeee" +result);
-		CodecRegistry codecRegistry = new CodecRegistry();
-		codecRegistry.register(new TimestampAsStringCodec(TypeCodec.date(), Date.class));
-		Cluster.builder().withCodecRegistry(codecRegistry).build();
-		BoundStatement bound = prepared.bind(UUID.randomUUID(), 1l,2l,3l,"aaa","bb","cc","dd","ee","ff","ggg",result,"hh","iii",true,false,"INDIVIDUAL",true);
-		System.out.println("inseeeeeeeert" + bound);
-		session.execute(bound);
-
-		getUsersAllDetails(session);
-
-		// Update user data in users table
-		System.out.println("\n*********Update Company Data  *************");
-		session.execute("update company set address='new address'  where userId = 1");
-		getUsersAllDetails(session);
-
-		// Delete user from users table
-		System.out.println("\n*********Delete Company Data  *************");
-		session.execute("delete FROM company where userId = 2");
-		getUsersAllDetails(session);
-
-	}
-
-	
-
-	private static void getUsersAllDetails(final Session inSession) {
-		// Use select to get the users table data
-		ResultSet results = inSession.execute("SELECT * FROM company");
-		for (Row row : results) {
-			System.out.format("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n", row.getUUID("id"),row.getLong("userId"),row.getLong("idContactDetails"),row.getLong("idLogo"),row.getString("email"),row.getString("companyId"),row.getString("address"),row.getString("idTax"),row.getString("companyName"),row.getString("phoneNumber"),row.getString("description"),row.getDate("creationDate"),row.getString("industry"),row.getString("companyCategory"),row.getBool("isIdentityValidated"),row.getBool("isAddressValidated"),row.getString("userCategory"),row.getBool("isPhoneValidated"));
-		}
+	public static Cluster connect(String node) {
+		return Cluster.builder().addContactPoint(node).build();
 	}
 
 	@Override
 	public Company createCompany(Company company) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement prepared = session
+				.prepare("insert into company (id, email, business_activity,capital,category_code,"
+						+ "category_label,company_id,company_name,company_type, description,director,employees_number,founding_year,id_address,"
+						+ "id_contact_details,id_headquarter_address,id_tax, is_address_validated,is_headquarter,"
+						+ "is_identity_validated, is_phone_validated, legal_immatriculation,id_logo,legal_name,"
+						+ "legal_status, legal_structure,phone_number,user_id,web_site) values (?, ? ,?)");
+
+		BoundStatement bound = prepared.bind(UUID.randomUUID(), company.getEmail(), company.getBusinessActivity(),
+				company.getCapital(), company.getCategoryCode(), company.getCategoryLabel(), company.getCompanyId(),
+				company.getCompanyName(), company.getCompanyType(), company.getDescription(), company.getDirector(),
+				company.getEmployeesNumber(), company.getFoundingYear(), company.getIdAddress(),
+				company.getIdContactDetails(), company.getIdHeadQuarterAddress(), company.getIdTax(),
+				company.getIsAddressValidated(), company.getIsHeadquarters(), company.getIsIdentityValidated(),
+				company.getIsPhoneValidated(), company.getLegalImmatriculation(), company.getIdLogo(),
+				company.getLegalName(), company.getLegalStatus(), company.getLegalStructure(), company.getPhoneNumber(),
+				
+				 company.getUserId(), company.getWebSite());
+		session.execute(bound);
+		return company;
 	}
 
 	@Override
 	public Company getCompany(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		//Company u = (Company) session.execute("select * from company where id=?", id);
+		return cassandraOperation.selectOneById(id, Company.class);
+
 	}
 
 	@Override
 	public void updateCompany(Company company) {
-		// TODO Auto-generated method stub
-		
+		cassandraOperation.update(company);
+
+//		session.execute(
+//				"update company set  email=?, business_activity=?,capital=?,category_code=?,"
+//						+ "category_label=?,company_id=?,company_name=?,company_type=?, "
+//						+ "description=?,director=?,employees_number=?,founding_year=?,"
+//						+ "id_address,id_contact_details=?,id_headquarter_address=?,id_tax=?,"
+//						+ " is_address_validated=?,is_headquarter=?, is_identity_validated=?, is_phone_validated=?,"
+//						+ " legal_immatriculation=?,id_logo=?,legal_name=?, legal_status=?,"
+//						+ " legal_structure=?,phone_number=?,user_category=?,user_id=?,"
+//						+ "web_site=?   where id = ?",
+//				company.getEmail(), company.getBusinessActivity(), company.getCapital(), company.getCategoryCode(),
+//				company.getCategoryLabel(), company.getCompanyId(), company.getCompanyName(), company.getCompanyType(),
+//				company.getDescription(), company.getDirector(), company.getEmployeesNumber(),company.getFoundingYear(),
+//				company.getIdAddress(), company.getIdContactDetails(),company.getIdHeadQuarterAddress(), company.getIdTax(),
+//				company.getIsAddressValidated(),company.getIsHeadquarters(), company.getIsIdentityValidated(), company.getIsPhoneValidated(),
+//				company.getLegalImmatriculation(), company.getIdLogo(), company.getLegalName(),company.getLegalStatus(),
+//				company.getLegalStructure(), company.getPhoneNumber(),company.getUserCategory(), company.getUserId(), 
+//				company.getWebSite(), company.getId());
+
 	}
 
 	@Override
+
+	public void deleteCompanies(Collection<UUID> companies) {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for (UUID id : companies) {
+			list.add(new Object[] { id });
+		}
+		cassandraOperation.delete(list);
+	}
+
 	public void deleteCompany(UUID id) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
+		cassandraOperation.deleteById(id, Company.class);
+
 	}
 
 	@Override
 	public List<Company> getAllCompanies() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return cassandraOperation.select("SELECT * FROM company", Company.class);
+
 	}
 
+	@Override
+	public void deleteAll() {
+		
+		session.execute("delete FROM company ");
+	}
 
 }

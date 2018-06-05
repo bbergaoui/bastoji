@@ -53,7 +53,7 @@ public class IdentityProofDao implements IIdentityProofDao {
 	@Override
 	public void updateIdentityProof(IdentityProof identityProof) {
 
-		session.execute("update identity_proof " + "  where id = ?", identityProof.getDescription(),
+		session.execute("update identity_proof  where id = ?", identityProof.getDescription(),
 				identityProof.getProof(), identityProof.getThumbnail(), identityProof.getUserId(), identityProof.getId());
 
 	}

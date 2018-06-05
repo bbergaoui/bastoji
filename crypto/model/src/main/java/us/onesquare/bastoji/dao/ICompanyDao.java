@@ -1,5 +1,6 @@
 package us.onesquare.bastoji.dao;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,5 +19,7 @@ public interface ICompanyDao {
 	public void deleteAll();
 
 	public List<Company> getAllCompanies();
+
+	void deleteCompanies(Collection<UUID> companies);
 
 }

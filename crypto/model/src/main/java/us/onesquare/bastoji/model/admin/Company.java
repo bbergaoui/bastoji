@@ -6,9 +6,6 @@ import java.util.UUID;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import us.onesquare.bastoji.model.utils.ApplicationAddress;
-import us.onesquare.bastoji.model.utils.UserCategory;
-
 @Table
 public class Company {
 	@PrimaryKey
@@ -44,8 +41,6 @@ public class Company {
 
 	private Boolean isAddressValidated;
 
-	private Integer userCategory =2;
-
 	private Boolean isPhoneValidated;
 
 	private Double capital;
@@ -63,6 +58,14 @@ public class Company {
 	private String legalImmatriculation;
 
 	private Boolean isHeadquarters;
+
+	private String legalName;
+
+	private String legalStructure;
+	
+	private String categoryCode;
+	
+	private String categoryLabel;
 
 	public UUID getId() {
 		return id;
@@ -240,14 +243,7 @@ public class Company {
 		return director;
 	}
 
-	public Integer getUserCategory() {
-		return userCategory;
-	}
-
-	public void setUserCategory(Integer userCategory) {
-		this.userCategory = userCategory;
-	}
-
+	
 	public Long getIdHeadQuarterAddress() {
 		return idHeadQuarterAddress;
 	}
@@ -308,23 +304,9 @@ public class Company {
 		this.categoryLabel = categoryLabel;
 	}
 
-	public String getLegalIsNonprofit() {
-		return legalIsNonprofit;
-	}
 
-	public void setLegalIsNonprofit(String legalIsNonprofit) {
-		this.legalIsNonprofit = legalIsNonprofit;
-	}
 
-	private String legalName;
 
-	private String legalStructure;
-	
-	private String categoryCode;
-	
-	private String categoryLabel;
-
-	private String legalIsNonprofit;
 
 	
 }

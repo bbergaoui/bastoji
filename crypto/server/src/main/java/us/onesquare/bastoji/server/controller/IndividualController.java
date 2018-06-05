@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.datastax.driver.core.utils.UUIDs;
 
-import us.onesquare.bastoji.dao.IIndividualDao;
 import us.onesquare.bastoji.model.admin.Individual;
+import us.onesquare.bastoji.service.IIndividualService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -29,26 +29,19 @@ import us.onesquare.bastoji.model.admin.Individual;
 public class IndividualController {
 
 	@Autowired
-	IIndividualDao individualDao;
+	IIndividualService individualService;
 
 	@GetMapping("/individuals")
 	public List<Individual> getAllIndividuals() {
-		System.out.println("Get all Individuals...");
 
 		List<Individual> individuals = new ArrayList<>();
-		individualDao.getAllIndividuals();
+		individualService.getAllIndividuals();
 		return individuals;
 	}
 
 	@PostMapping("/individuals/create")
 	public ResponseEntity<Individual> createIndividual(@Valid @RequestBody Individual individual) {
-		System.out.println("Create Individual: " + individual.getId() + "...");
-
-		individual.setId(UUIDs.timeBased());
-		individual.setIsAddressValidated(false);
-		individual.setIsIdentityValidated(false);
-		individual.setIsPhoneValidated(false);
-		Individual _individual = individualDao.createIndividual(individual);
+		Individual _individual = individualService.createIndividual(individual);
 		return new ResponseEntity<>(_individual, HttpStatus.OK);
 	}
 
@@ -56,36 +49,15 @@ public class IndividualController {
 	public ResponseEntity<Individual> updateIndividual(@PathVariable("id") UUID id, @RequestBody Individual individual) {
 		System.out.println("Update Individual with ID = " + id + "...");
 
-		Individual individualData = individualDao.getIndividual(id);
+		Individual individualData = individualService.getIndividual(id);
 		if (individualData == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		individualData.setIdTiers(individual.getIdTiers());
-		individualData.setIdUser(individual.getIdUser());
-		individualData.setUserCategory(individual.getUserCategory());
-
-		individual.setIsAddressValidated(individual.getIsAddressValidated());
-		individual.setIsIdentityValidated(individual.getIsIdentityValidated());
-		individual.setIsPhoneValidated(individual.getIsPhoneValidated());
-		individualDao.updateIndividual(individualData);
+		
+		individualService.updateIndividual(individualData);
 		return new ResponseEntity<>(individualData, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/individuals/{id}")
-	public ResponseEntity<String> deleteIndividual(@PathVariable("id") UUID id) {
-		System.out.println("Delete Individual with ID = " + id + "...");
+	
 
-		individualDao.deleteIndividual(id);
-
-		return new ResponseEntity<>("Individual has been deleted!", HttpStatus.OK);
-	}
-
-	@DeleteMapping("/individuals/delete")
-	public ResponseEntity<String> deleteAllIndividuals() {
-		System.out.println("Delete All Individuals...");
-
-		individualDao.deleteAll();
-
-		return new ResponseEntity<>("All individuals have been deleted!", HttpStatus.OK);
-	}
 }

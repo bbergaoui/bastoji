@@ -7,6 +7,8 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import us.onesquare.bastoji.model.utils.UserCategory;
+
 @Table
 public class User {
 
@@ -18,6 +20,7 @@ public class User {
 
 	@Transient
 	private String password;
+	private UserCategory userCategory;
 	
 	public User() {
 	}
@@ -49,6 +52,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public UserCategory getUserCategory() {
+		return userCategory;
+	}
+
+	public void setUserCategory(UserCategory userCategory) {
+		this.userCategory = userCategory;
 	}
 
 	

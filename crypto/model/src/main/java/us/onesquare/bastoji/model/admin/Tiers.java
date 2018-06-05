@@ -6,9 +6,7 @@ import java.util.UUID;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import us.onesquare.bastoji.model.utils.ApplicationAddress;
 import us.onesquare.bastoji.model.utils.Gender;
-import us.onesquare.bastoji.model.utils.TradingExperience;
 @Table
 public class Tiers {
 	
@@ -26,7 +24,7 @@ public class Tiers {
 
 	private Date birthdate;
 
-	private Gender gender;
+	private Integer gender;
 
 	private UUID idPhoto;
 
@@ -93,11 +91,11 @@ public class Tiers {
 		this.birthdate = birthdate;
 	}
 
-	public Gender getGender() {
+	public Integer getGender() {
 		return gender;
 	}
 
-	public void setGender(Gender gender) {
+	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
 

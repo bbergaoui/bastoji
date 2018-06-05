@@ -12,18 +12,15 @@ public class Individual {
 	@PrimaryKey
 	private UUID id;
 
-	private Long idUser; 
+	private UUID idUser; 
 	
-	private Long idTiers;
+	private UUID idTiers;
 	
 	private Boolean isIdentityValidated;
 	
 	private Boolean isAddressValidated;
 
 	private Boolean isPhoneValidated;
-	
-	private UserCategory userCategory=UserCategory.INDIVIDUAL;
-	
 	
 	public UUID getId() {
 		return id;
@@ -33,28 +30,20 @@ public class Individual {
 		this.id = id;
 	}
 
-	public Long getIdUser() {
+	public UUID getIdUser() {
 		return idUser;
 	}
 
-	public void setIdUser(Long idUser) {
+	public void setIdUser(UUID idUser) {
 		this.idUser = idUser;
 	}
 
 	
-	public UserCategory getUserCategory() {
-		return userCategory;
-	}
-
-	public void setUserCategory(UserCategory userCategory) {
-		this.userCategory = userCategory;
-	}
-
-	public Long getIdTiers() {
+	public UUID getIdTiers() {
 		return idTiers;
 	}
 
-	public void setIdTiers(Long idTiers) {
+	public void setIdTiers(UUID idTiers) {
 		this.idTiers = idTiers;
 	}
 
