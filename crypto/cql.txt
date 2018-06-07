@@ -1,35 +1,35 @@
  CREATE TABLE company
-  (id UUID primary key, user_id UUID,id_contact_details UUID ,
-  	id_logo UUID,email varchar, company_id varchar, id_address UUID,
-	id_tax varchar, company_name varchar, phone_number varchar, description varchar,
-	founding_year date , business_activity varchar,company_type varchar,
- 	is_identity_validated boolean, is_address_validated boolean, 
-  	is_phone_validated boolean, capital double, employees_number int,legal_status varchar,
-  	web_site varchar,id_headquarter_address UUID, director varchar, legal_immatriculation varchar,
-	is_headquarter boolean,category_code varchar,category_label varchar, legal_name varchar,
-	legal_structure varchar);
+  (id UUID primary key, userid UUID,idcontactdetails UUID ,
+  	idlogo UUID,email varchar, companyid varchar, idaddress UUID,
+	idtax varchar, companyname varchar, phonenumber varchar, description varchar,
+	foundingyear date , businessactivity varchar,companytype varchar,
+ 	isidentityvalidated boolean, isaddressvalidated boolean, 
+  	isphonevalidated boolean, capital double, employeesnumber int,legalstatus varchar,
+  	website varchar,idheadquarteraddress UUID, director varchar, legalimmatriculation varchar,
+	isheadquarter boolean,categorycode varchar,categorylabel varchar, legalname varchar,
+	legalstructure varchar);
 
 
 //user 
 
- CREATE TABLE user (id UUID primary key,email text,password text,user_category int );
+ CREATE TABLE user (id UUID primary key,email text,password text,usercategory int );
  
  //IdentityProof
- CREATE TABLE identity_proof (id UUID primary key,user_id UUID,description text ,proof blob,thumbnail blob);
+ CREATE TABLE identityproof (id UUID primary key,userid UUID,description text ,proof blob,thumbnail blob);
  
  //tiers
- CREATE TABLE tiers (id UUID primary key,id_card varchar,passport varchar ,first_name varchar,last_name varchar,birthdate date,gender int ,id_photo UUID,id_address UUID,email varchar,function varchar,facebook varchar,subscription_date date ,phone_number varchar,id_tax varchar ,id_trading_experience int);
+ CREATE TABLE tiers (id UUID primary key,idcard varchar,passport varchar ,firstname varchar,lastname varchar,birthdate date,gender int ,idphoto UUID,idaddress UUID,email varchar,function varchar,facebook varchar,subscriptiondate date ,phonenumber varchar,idtax varchar ,idtradingexperience int);
  
  // registration
-CREATE TABLE  registration (id UUID primary key,email varchar,password varchar ,is_company boolean, country varchar,
-street_number varchar, street_name varchar, postal_code varchar,city varchar , company_email varchar ,company_name varchar,company_id varchar,first_name varchar,last_name varchar,enabled boolean ,phone_number text,mail_confirmation_token varchar,phone_confirmation_token varchar );
+CREATE TABLE  registration (id UUID primary key,email varchar,password varchar ,iscompany boolean, country varchar,
+streetnumber varchar, street_name varchar, postalcode varchar,city varchar , companyemail varchar ,companyname varchar,companyid varchar,firstname varchar,lastname varchar,enabled boolean ,phonenumber text,mailconfirmationtoken varchar,phoneconfirmationtoken varchar );
 
 //ApplicationAddress
-CREATE TABLE  application_address (id UUID primary key,country varchar,street_number varchar ,street_name varchar,postal_code varchar ,city varchar);
+CREATE TABLE  applicationaddress (id UUID primary key,country varchar,streetnumber varchar ,streetname varchar,postalcode varchar ,city varchar);
 //photo
 CREATE TABLE  photo (id UUID primary key,photo blob,thumbnail blob);
 
-create table individual (id UUID primary key,id_user UUID,  idTiers UUID,
+create table individual (id UUID primary key,iduser UUID,  idTiers UUID,
  isIdentityValidated boolean,isAddressValidated boolean, isPhoneValidated boolean);
 
 

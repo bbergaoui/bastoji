@@ -20,13 +20,17 @@ public class EscrowAgreement {
 	
 	private Double escrowFunds;
 	
-	private String escrowFundsType;
+	private String escrowFundsCurrency;
 	
 	private Double releaseFunds;
+	
+	private String releaseFundsCurrency;
 	
 	private String releaseConditions;
 	
 	private Double escrowAgentFees;
+	
+	private String agentFeesCurrency;
 	
 	private Date LimitPaymentDate;
 	
@@ -131,7 +135,29 @@ public class EscrowAgreement {
 	public void setReleaseFunds(Double releaseFunds) {
 		this.releaseFunds = releaseFunds;
 	}
-	
+	public String getEscrowFundsCurrency() {
+		return escrowFundsCurrency;
+	}
+
+	public void setEscrowFundsCurrency(String escrowFundsCurrency) {
+		this.escrowFundsCurrency = escrowFundsCurrency;
+	}
+
+	public String getReleaseFundsCurrency() {
+		return releaseFundsCurrency;
+	}
+
+	public void setReleaseFundsCurrency(String releaseFundsCurrency) {
+		this.releaseFundsCurrency = releaseFundsCurrency;
+	}
+
+	public String getAgentFeesCurrency() {
+		return agentFeesCurrency;
+	}
+
+	public void setAgentFeesCurrency(String agentFeesCurrency) {
+		this.agentFeesCurrency = agentFeesCurrency;
+	}
 	
 
 }
