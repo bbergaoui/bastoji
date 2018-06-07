@@ -18,7 +18,6 @@ public class User {
 	@Column
 	private String email;
 
-	@Transient
 	private String password;
 	private Integer userCategory;
 	

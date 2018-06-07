@@ -1,9 +1,6 @@
 package us.onesquare.bastoji;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.cassandra.core.CassandraOperations;
@@ -94,10 +91,17 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public User findByUserNameAndPassword(String login, String password) {
-		PreparedStatement prepared = session.prepare("insert into user (id, email, password) values (?, ? ,?)");
+		PreparedStatement prepared = session.prepare("select * from user where email = ? and password = ? ALLOW FILTERING");
 		BoundStatement bound = prepared.bind( login, password);
 		return cassandraOperation.selectOne(bound, User.class);
 		
+	}
+
+	@Override
+	public Optional<User> retrieveUser(String username) {
+		PreparedStatement prepared = session.prepare("select * from user where email = ? ALLOW FILTERING ");
+		BoundStatement bound = prepared.bind( username);
+		return Optional.of(cassandraOperation.selectOne(bound, User.class));
 	}
 
 }

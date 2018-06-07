@@ -3,11 +3,7 @@ package us.onesquare.bastoji.server.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import us.onesquare.bastoji.model.subscription.Registration;
 import us.onesquare.bastoji.service.IAdminService;
@@ -25,6 +21,13 @@ public class AdminController {
 	ResponseEntity<Registration> create(@RequestBody Registration registration) {
 		 adminService.register(registration);
 		 return new ResponseEntity<Registration>(registration , HttpStatus.OK);
+	}
+
+
+	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
+	ResponseEntity<String> confirm(@RequestParam("token") String token) {
+		adminService.confirm(token);
+		return new ResponseEntity<String>("" , HttpStatus.OK);
 	}
 
 //	@RequestMapping(value = "/registration/{id}", method = RequestMethod.DELETE)

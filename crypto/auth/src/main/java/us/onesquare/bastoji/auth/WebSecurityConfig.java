@@ -4,24 +4,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception {
-        // @formatter:off
-	auth.inMemoryAuthentication()
-	  .withUser("john").password(passwordEncoder.encode("123")).roles("USER").and()
-	  .withUser("tom").password(passwordEncoder.encode("111")).roles("ADMIN").and()
-	  .withUser("user1").password(passwordEncoder.encode("pass")).roles("USER").and()
-	  .withUser("admin").password(passwordEncoder.encode("nimda")).roles("ADMIN");
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setPasswordEncoder(new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence charSequence) {
+                return charSequence.toString();
+            }
+
+            @Override
+            public boolean matches(CharSequence charSequence, String s) {
+                return charSequence.toString().matches(s);
+            }
+        });
+        authProvider.setUserDetailsService(userDetailsService);
+
+        auth.authenticationProvider(authProvider);
+
     }// @formatter:on
 
     @Override

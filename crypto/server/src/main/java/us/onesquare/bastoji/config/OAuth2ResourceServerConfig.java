@@ -2,6 +2,7 @@ package us.onesquare.bastoji.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -15,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
 
-//@Configuration
+@Configuration
 //@PropertySource({ "classpath:persistence.properties" })
 //@EnableResourceServer
 public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter {
@@ -30,7 +31,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         // @formatter:off
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 		    .and()
-		    .authorizeRequests().anyRequest().permitAll();
+		    .authorizeRequests().anyRequest().denyAll();
 	// @formatter:on		
     }
 
