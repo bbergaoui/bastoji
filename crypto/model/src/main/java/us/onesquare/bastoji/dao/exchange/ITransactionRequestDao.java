@@ -22,8 +22,7 @@ public interface ITransactionRequestDao {
 
 	void deleteTransactionRequests(Collection<UUID> transactionRequests);
 
+	List<TransactionRequest> getAllTransactionRequestsByUserName(String userName, Integer first, Integer limit);
 
-	List<TransactionRequest> getAllTransactionRequestsByUserName(String userName, Long first, Integer limit);
-
-
+	List<TransactionRequest> getAllTransactionRequestsByUserId(UUID userId, Integer first, Integer limit);
 }

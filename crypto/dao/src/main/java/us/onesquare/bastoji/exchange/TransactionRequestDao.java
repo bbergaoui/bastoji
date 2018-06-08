@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.cassandra.core.CassandraOperations;
+import org.springframework.stereotype.Component;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
@@ -15,9 +16,11 @@ import com.datastax.driver.core.Session;
 import com.datastax.driver.core.SimpleStatement;
 import com.datastax.driver.core.Statement;
 
+import us.onesquare.bastoji.CassandraPaging;
 import us.onesquare.bastoji.dao.exchange.ITransactionRequestDao;
 import us.onesquare.bastoji.model.exchange.TransactionRequest;
 
+@Component
 public class TransactionRequestDao implements ITransactionRequestDao {
 
 	@Autowired
@@ -25,7 +28,10 @@ public class TransactionRequestDao implements ITransactionRequestDao {
 
 	@Autowired
 	private CassandraOperations cassandraOperation;
-
+	
+	@Autowired
+	CassandraPaging cassandraPaging = new CassandraPaging(session);
+	
 	public static Cluster connect(String node) {
 		return Cluster.builder().addContactPoint(node).build();
 	}
@@ -75,14 +81,19 @@ public class TransactionRequestDao implements ITransactionRequestDao {
 	}
 
 	@Override
-	public List<TransactionRequest> getAllTransactionRequestsByUserName(String userName, Long first, Integer limit) {
-		PreparedStatement prepared = session.prepare("SELECT * FROM transaction_request where username=? ");
-
-		BoundStatement bound = prepared.bind(userName);
-		return cassandraOperation.select(bound, TransactionRequest.class);
+	public List<TransactionRequest> getAllTransactionRequestsByUserName(String userName, Integer first, Integer limit) {
+		Statement statement=new SimpleStatement("SELECT * FROM transaction_request where username=? ",userName);
+		cassandraPaging.fetchRowsWithPage(statement, first, limit);
+		return cassandraOperation.select(statement, TransactionRequest.class);
 
 	}
+	@Override
+	public List<TransactionRequest> getAllTransactionRequestsByUserId(UUID userId, Integer first, Integer limit) {
+		Statement statement=new SimpleStatement("SELECT * FROM transaction_request where userid=? ",userId);
+		cassandraPaging.fetchRowsWithPage(statement, first, limit);
+		return cassandraOperation.select(statement, TransactionRequest.class);
 
+	}
 	@Override
 	public void deleteAll() {
 		session.execute("delete FROM transaction_request");

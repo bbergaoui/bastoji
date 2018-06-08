@@ -1,21 +1,23 @@
 package us.onesquare.bastoji.server;
 
-import org.apache.tools.ant.taskdefs.email.EmailTask;
+import java.util.List;
+import java.util.UUID;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import us.onesquare.bastoji.dao.ICompanyDao;
 import us.onesquare.bastoji.dao.IRegistrationDao;
+import us.onesquare.bastoji.dao.exchange.ITransactionRequestDao;
 import us.onesquare.bastoji.model.admin.Company;
+import us.onesquare.bastoji.model.exchange.TransactionRequest;
 import us.onesquare.bastoji.model.subscription.Registration;
 import us.onesquare.bastoji.service.ICompanyService;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.logging.Logger;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,6 +31,10 @@ public class ServerApplicationTests {
 
 	@Autowired
 	private IRegistrationDao registrationDao;
+	
+	@Autowired
+	private ITransactionRequestDao transactionRequestDao;
+
 
 	@Test
 	public void contextLoads() {
@@ -75,7 +81,25 @@ public class ServerApplicationTests {
 
 		Assert.assertTrue(companies.size()>0);
 	}
+	@Test
+	public void transactionRequestDaoTest() {
 
+
+		List<TransactionRequest> requests = transactionRequestDao.getAllTransactionRequests( 0l, 10l);
+
+		if (requests.size() ==0) {
+			TransactionRequest c = new TransactionRequest();
+			c.setId(UUID.randomUUID());
+			transactionRequestDao.createTransactionRequest(c);
+		}
+
+		requests = transactionRequestDao.getAllTransactionRequests( 0l, 10l);
+
+
+		Logger.getLogger("main test").info(" number of requests " + requests.size());
+
+		Assert.assertTrue(requests.size()>0);
+	}
 
 
 }

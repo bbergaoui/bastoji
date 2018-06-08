@@ -76,7 +76,6 @@ public class CassandraUtil {
         cluster.setPort(getPortNumber());
         cluster.setUsername(getUsername());
         cluster.setPassword(getPassword());
-        cluster.setQueryOptions(new QueryOptions().setFetchSize(100));
         return cluster;
     }
 

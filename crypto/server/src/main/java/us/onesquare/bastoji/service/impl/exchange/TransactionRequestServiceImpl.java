@@ -1,19 +1,23 @@
 package us.onesquare.bastoji.service.impl.exchange;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.datastax.driver.core.PreparedStatement;
 
 import us.onesquare.bastoji.dao.exchange.ITransactionRequestDao;
 import us.onesquare.bastoji.model.exchange.TransactionRequest;
 import us.onesquare.bastoji.service.ITransactionRequestService;
 @Component
-public class TransactionRequestServiceImpl implements ITransactionRequestService{
+public abstract class TransactionRequestServiceImpl implements ITransactionRequestService{
+	
+	
+	
 	@Autowired
 	private ITransactionRequestDao transactionRequestDao;
+	
+	
 	@Override
 	public void requestTransaction(TransactionRequest request) {
 		
@@ -33,9 +37,16 @@ public class TransactionRequestServiceImpl implements ITransactionRequestService
 	}
 
 	@Override
-	public List<TransactionRequest> getAllRequestsByUserName(String userName, Long first, Integer limit) {
+	public List<TransactionRequest> getAllRequestsByUserName(String userName, Integer first, Integer limit) {
 
 		return  transactionRequestDao.getAllTransactionRequestsByUserName(userName, first, limit);
 	}
 
+	@Override
+	public List<TransactionRequest> getAllRequestsByUserId(UUID userId, Integer first, Integer limit) {
+
+		return  transactionRequestDao.getAllTransactionRequestsByUserId(userId, first, limit);
+	}
+	
+	
 }

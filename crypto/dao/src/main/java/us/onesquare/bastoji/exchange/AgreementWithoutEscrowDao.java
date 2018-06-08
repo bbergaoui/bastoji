@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.cassandra.core.CassandraOperations;
+import org.springframework.stereotype.Component;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
@@ -15,7 +16,7 @@ import com.datastax.driver.core.Session;
 
 import us.onesquare.bastoji.dao.exchange.IAgreementWithoutEscrowDao;
 import us.onesquare.bastoji.model.exchange.AgreementWithoutEscrow;
-
+@Component
 public class AgreementWithoutEscrowDao implements IAgreementWithoutEscrowDao{
 	
 	

@@ -1,16 +1,17 @@
 package us.onesquare.bastoji.auth;
 
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import us.onesquare.bastoji.UserDao;
+
 import us.onesquare.bastoji.dao.IUserDao;
 import us.onesquare.bastoji.model.admin.CryptoUserDetails;
 import us.onesquare.bastoji.model.admin.User;
 
-import java.util.logging.Logger;
 
 
 @Component
