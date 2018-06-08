@@ -17,8 +17,9 @@ import org.springframework.data.cassandra.core.CassandraTemplate;
 //import org.springframework.data.cassandra.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.core.convert.CassandraConverter;
 import org.springframework.data.cassandra.core.convert.MappingCassandraConverter;
-import org.springframework.data.cassandra.core.mapping.BasicCassandraMappingContext;
 import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
+
+import com.datastax.driver.core.QueryOptions;
 
 /**
  * Utility class for getting the CassandraOperations object.
@@ -30,6 +31,8 @@ import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
 @PropertySource(value = { "classpath:application.properties" })
 public class CassandraUtil {
 
+	
+	
     /**
      * Constant String for Keyspace
      */
@@ -73,6 +76,7 @@ public class CassandraUtil {
         cluster.setPort(getPortNumber());
         cluster.setUsername(getUsername());
         cluster.setPassword(getPassword());
+        cluster.setQueryOptions(new QueryOptions().setFetchSize(100));
         return cluster;
     }
 

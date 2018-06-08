@@ -129,6 +129,11 @@ public class AgreementWithoutEscrow {
 	public void setAgreementDate(Date agreementDate) {
 		this.agreementDate = agreementDate;
 	}
+
+	public Object getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

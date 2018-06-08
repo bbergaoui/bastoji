@@ -15,22 +15,25 @@
  CREATE TABLE user (id UUID primary key,email text,password text,usercategory int );
  
  //IdentityProof
- CREATE TABLE identityproof (id UUID primary key,userid UUID,description text ,proof blob,thumbnail blob);
+ CREATE TABLE identity_proof (id UUID primary key,userid UUID,description text ,proof blob,thumbnail blob);
  
  //tiers
  CREATE TABLE tiers (id UUID primary key,idcard varchar,passport varchar ,firstname varchar,lastname varchar,birthdate date,gender int ,idphoto UUID,idaddress UUID,email varchar,function varchar,facebook varchar,subscriptiondate date ,phonenumber varchar,idtax varchar ,idtradingexperience int);
  
  // registration
 CREATE TABLE  registration (id UUID primary key,email varchar,password varchar ,iscompany boolean, country varchar,
-streetnumber varchar, street_name varchar, postalcode varchar,city varchar , companyemail varchar ,companyname varchar,companyid varchar,firstname varchar,lastname varchar,enabled boolean ,phonenumber text,mailconfirmationtoken varchar,phoneconfirmationtoken varchar );
+streetnumber varchar, streetname varchar, postalcode varchar,city varchar , companyemail varchar ,companyname varchar,companyid varchar,firstname varchar,lastname varchar,enabled boolean ,phonenumber text,mailconfirmationtoken varchar,phoneconfirmationtoken varchar );
 
 //ApplicationAddress
-CREATE TABLE  applicationaddress (id UUID primary key,country varchar,streetnumber varchar ,streetname varchar,postalcode varchar ,city varchar);
+CREATE TABLE  application_address (id UUID primary key,country varchar,streetnumber varchar ,streetname varchar,postalcode varchar ,city varchar);
 //photo
 CREATE TABLE  photo (id UUID primary key,photo blob,thumbnail blob);
 
 create table individual (id UUID primary key,iduser UUID,  idTiers UUID,
  isIdentityValidated boolean,isAddressValidated boolean, isPhoneValidated boolean);
+ 
+ create table transaction_request(id UUID Primary Key,transactiondate date, transactiontype int, userId UUID,bitcoinaddress int,  comment varchar);
+ 
 
 
 		

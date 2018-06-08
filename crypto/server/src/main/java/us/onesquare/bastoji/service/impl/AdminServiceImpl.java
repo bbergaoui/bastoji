@@ -22,8 +22,7 @@ public class AdminServiceImpl implements IAdminService {
 	@Autowired
 	private IUserDao userDao;
 
-	@Autowired
-	private ICompanyDao companyDao;
+	
 
 	@Override
 	public void register(Registration registration) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.cassandra.core.CassandraOperations;
@@ -14,6 +15,7 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Session;
 
+import ch.qos.logback.classic.Level;
 import us.onesquare.bastoji.dao.IPhotoDao;
 import us.onesquare.bastoji.model.photo.Photo;
 
@@ -23,6 +25,8 @@ public class PhotoDao implements IPhotoDao {
 	@Autowired
 	private Session session;
 
+	static Logger logger = Logger.getLogger(PhotoDao.class.getName());
+	
 	@Autowired
 	private CassandraOperations cassandraOperation;
 
@@ -32,7 +36,7 @@ public class PhotoDao implements IPhotoDao {
 
 	@Override
 	public Photo createPhoto(Photo photo) {
-
+	
 		PreparedStatement prepared = session.prepare("insert into photo (id, photo,thumbnail) values (?, ? ,?)");
 
 		BoundStatement bound = prepared.bind(UUID.randomUUID(), photo.getPhoto(), photo.getThumbnail());
