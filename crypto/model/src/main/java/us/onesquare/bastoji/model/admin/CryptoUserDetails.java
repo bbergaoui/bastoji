@@ -16,4 +16,9 @@ public class CryptoUserDetails extends org.springframework.security.core.userdet
     public CryptoUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
+
+    @Override
+    public String toString() {
+        return "CryptoUserDetails{}" + getUsername() + " " + getPassword() + " " + getAuthorities();
+    }
 }

@@ -55,10 +55,10 @@ public class OAuth2AuthorizationServerConfigInMemory extends AuthorizationServer
           .autoApprove(false).accessTokenValiditySeconds(3600)
 
           .and()
-          .withClient("fooClientIdPassword")
-          .secret("secret")
+          .withClient("web.client")
+          .secret("loginpasswordsecret")
           .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-          .scopes("foo", "read", "write")
+          .scopes("web", "read", "write")
           .accessTokenValiditySeconds(3600) // 1 hour
           .refreshTokenValiditySeconds(2592000) // 30 days
 
@@ -66,7 +66,7 @@ public class OAuth2AuthorizationServerConfigInMemory extends AuthorizationServer
           .withClient("barClientIdPassword")
           .secret("secret")
           .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-          .scopes("bar", "read", "write")
+          .scopes("facebook", "read", "write")
           .accessTokenValiditySeconds(3600) // 1 hour
           .refreshTokenValiditySeconds(2592000) // 30 days
 	  ;
