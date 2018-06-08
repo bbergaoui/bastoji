@@ -3,6 +3,7 @@ package us.onesquare.bastoji.dao;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import us.onesquare.bastoji.model.admin.User;
@@ -26,4 +27,5 @@ public interface IUserDao {
 
 	public User findByUserNameAndPassword(String login, String password);
 
+    Optional<User> retrieveUser(String username);
 }

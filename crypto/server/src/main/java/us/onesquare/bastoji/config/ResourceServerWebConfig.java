@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({ "org.baeldung.web.controller" })
+@ComponentScan({ "us.onesquare.bastoji" })
 public class ResourceServerWebConfig extends WebMvcConfigurerAdapter {
     //
 }

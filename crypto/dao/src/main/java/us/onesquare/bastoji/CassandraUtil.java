@@ -42,31 +42,31 @@ public class CassandraUtil {
      */
     private static final String CONTACTPOINTS = "cassandra.contactpoints";
     /**
-     * Constant String for Port 
+     * Constant String for Port
      */
     private static final String PORT = "cassandra.port";
 	private static final String USERNAME = "cassandra.username";
 	private static final String PASSWORD = "cassandra.password";
-    
+
     @Autowired
     private Environment environment;
 
     public CassandraUtil() {
         System.out.println("CassandraUtil()");
     }
-    
+
     private String getKeyspaceName() {
-        return environment.getProperty(KEYSPACE);       
+        return environment.getProperty(KEYSPACE);
     }
-    
+
     private String getContactPoints() {
         return environment
-                .getProperty(CONTACTPOINTS);        
+                .getProperty(CONTACTPOINTS);
     }
-    
+
     private int getPortNumber() {
         return Integer.parseInt(environment
-                .getProperty(PORT));        
+                .getProperty(PORT));
     }
 
     @Bean

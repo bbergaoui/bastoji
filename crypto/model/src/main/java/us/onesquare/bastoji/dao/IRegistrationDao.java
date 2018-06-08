@@ -44,4 +44,9 @@ public interface IRegistrationDao {
     public List<Registration> getAllRegistrations();
 
 	void deleteRegistrations(Collection<UUID> registrations);
+
+
+    boolean userExists(String email);
+
+    Registration findByToken(String token);
 }

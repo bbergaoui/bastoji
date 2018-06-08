@@ -14,4 +14,6 @@ public interface IAdminService {
 	void updateRegistration(Registration registration);
 
 	void getUserProfile(User user);
+
+    void confirm(String token);
 }
